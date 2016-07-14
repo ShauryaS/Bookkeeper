@@ -11,6 +11,9 @@ import UIKit
 
 class LogInView: UIViewController{
     
+    @IBOutlet var emailUserTF: UITextField!
+    @IBOutlet var passwordTF: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogInView.dismissKeyboard))
@@ -38,4 +41,8 @@ class LogInView: UIViewController{
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func signIn(sender: AnyObject) {
+        self.performSegueWithIdentifier("LogToMainSegue", sender: sender)
+    }
+    
 }

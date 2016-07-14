@@ -10,6 +10,7 @@
 		4925B1CB1D36C095007E40B4 /* DLRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925B1C91D36C095007E40B4 /* DLRadioButton.m */; };
 		4925B1CC1D36C095007E40B4 /* UploadReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4925B1CA1D36C095007E40B4 /* UploadReceiptView.swift */; };
 		494C29731D3810FF00008D6A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494C29721D3810FF00008D6A /* SettingsView.swift */; };
+		494DE44E1D38535A001EA8C7 /* SelectPurposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DE44D1D38535A001EA8C7 /* SelectPurposeView.swift */; };
 		49DA21141D3517F1006FE98C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA21131D3517F1006FE98C /* AppDelegate.swift */; };
 		49DA21161D3517F1006FE98C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA21151D3517F1006FE98C /* ViewController.swift */; };
 		49DA21191D3517F1006FE98C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DA21171D3517F1006FE98C /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		4925B1C91D36C095007E40B4 /* DLRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLRadioButton.m; sourceTree = "<group>"; };
 		4925B1CA1D36C095007E40B4 /* UploadReceiptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadReceiptView.swift; sourceTree = "<group>"; };
 		494C29721D3810FF00008D6A /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		494DE44D1D38535A001EA8C7 /* SelectPurposeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPurposeView.swift; sourceTree = "<group>"; };
 		49DA21101D3517F1006FE98C /* Bookkeeping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookkeeping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA21131D3517F1006FE98C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DA21151D3517F1006FE98C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				49DA211F1D3517F1006FE98C /* Info.plist */,
 				49DA21411D351841006FE98C /* LoginView.swift */,
 				494C29721D3810FF00008D6A /* SettingsView.swift */,
+				494DE44D1D38535A001EA8C7 /* SelectPurposeView.swift */,
 			);
 			path = Bookkeeping;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494DE44E1D38535A001EA8C7 /* SelectPurposeView.swift in Sources */,
 				49DA21421D351841006FE98C /* LoginView.swift in Sources */,
 				4925B1CB1D36C095007E40B4 /* DLRadioButton.m in Sources */,
 				49DA21161D3517F1006FE98C /* ViewController.swift in Sources */,

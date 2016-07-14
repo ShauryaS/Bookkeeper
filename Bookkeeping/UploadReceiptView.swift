@@ -9,7 +9,13 @@
 import Foundation
 import UIKit
 
-class UploadReceiptView: UIViewController{
+class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    @IBOutlet var accountIDLab: UILabel!
+    @IBOutlet var attendeesTF: UITextField!
+    @IBOutlet var notesTF: UITextField!
+    @IBOutlet var imageView: UIImageView!
+    var imagePicker: UIImagePickerController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,5 +49,23 @@ class UploadReceiptView: UIViewController{
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func takePhoto(sender: AnyObject) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+            imagePicker.allowsEditing = false
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        imageView.image = image
+        self.dismissViewControllerAnimated(true, completion: nil);
+    }
+    
+    @IBAction func submit(sender: AnyObject) {
+        
+    }
     
 }

@@ -1,5 +1,5 @@
 //
-//  SettingsView.swift
+//  SelectPurposeView.swift
 //  Bookkeeping
 //
 //  Created by Shaurya Srivastava on 7/14/16.
@@ -9,19 +9,11 @@
 import Foundation
 import UIKit
 
-class SettingsView: UIViewController{
+class SelectPurposeView: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogInView.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        navigationItem.title="Settings"
-    }
-    
-    //Calls this function when the tap is recognized.
-    func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
+        navigationItem.title="Select Expense Purpose"
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -38,9 +30,9 @@ class SettingsView: UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    @IBAction func logout(sender: AnyObject) {
-        self.performSegueWithIdentifier("backToLogInSegue", sender: sender)
+    
+    @IBAction func choose(sender: AnyObject) {
+        self.performSegueWithIdentifier("SelectToMainSegue", sender: sender)
     }
     
 }
