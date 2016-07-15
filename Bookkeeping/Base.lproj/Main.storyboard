@@ -50,6 +50,15 @@
                                     <action selector="signIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ns5-v5-FY9"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ze-C0-lIZ">
+                                <rect key="frame" x="20" y="268" width="560" height="30"/>
+                                <state key="normal" title="Remember me">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="remember:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7cd-cD-Kff"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -57,6 +66,7 @@
                             <constraint firstItem="8g0-6W-Arx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="2XX-Fa-II8"/>
                             <constraint firstItem="8g0-6W-Arx" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="A4t-zk-eIJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NtJ-PX-Mbb" secondAttribute="trailing" constant="-20" id="AqE-Cs-gmo"/>
+                            <constraint firstItem="3Ze-C0-lIZ" firstAttribute="top" secondItem="8g0-6W-Arx" secondAttribute="bottom" constant="8" id="CxG-vL-Bqt"/>
                             <constraint firstItem="j8d-1s-R9J" firstAttribute="top" secondItem="8g0-6W-Arx" secondAttribute="bottom" constant="75" id="Fct-6u-wYV"/>
                             <constraint firstItem="Rdw-pk-9u7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NTk-Se-F4S"/>
                             <constraint firstItem="NtJ-PX-Mbb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ONY-jK-Ptd"/>
@@ -64,12 +74,15 @@
                             <constraint firstItem="NtJ-PX-Mbb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="YHe-i8-2SF"/>
                             <constraint firstItem="j8d-1s-R9J" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="bWy-Mw-BPT"/>
                             <constraint firstItem="Rdw-pk-9u7" firstAttribute="top" secondItem="NtJ-PX-Mbb" secondAttribute="bottom" constant="120" id="k1k-3R-iAN"/>
+                            <constraint firstItem="3Ze-C0-lIZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="mZZ-bf-Ryj"/>
                             <constraint firstItem="8g0-6W-Arx" firstAttribute="top" secondItem="Rdw-pk-9u7" secondAttribute="bottom" constant="20" id="s9w-O5-7H5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3Ze-C0-lIZ" secondAttribute="trailing" id="tzH-P7-GOI"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emailUserTF" destination="Rdw-pk-9u7" id="vue-9h-f1o"/>
                         <outlet property="passwordTF" destination="8g0-6W-Arx" id="UZd-3f-3Um"/>
+                        <outlet property="rememberMeButton" destination="3Ze-C0-lIZ" id="mzX-yw-g9f"/>
                         <segue destination="IEM-rR-mea" kind="show" identifier="LogToMainSegue" id="ii5-Lx-Gsa"/>
                     </connections>
                 </viewController>

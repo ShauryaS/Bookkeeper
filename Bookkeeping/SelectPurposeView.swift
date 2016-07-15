@@ -60,9 +60,6 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
         // selected value in Uipickerview in Swift
         let value=pickerDataSource[row]
         valSelected = value
-        if valSelected == ""{
-            valSelected = "Select Expense Purpose"
-        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

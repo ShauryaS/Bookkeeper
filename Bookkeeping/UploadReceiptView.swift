@@ -26,6 +26,9 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogInView.dismissKeyboard))
         view.addGestureRecognizer(tap)
         navigationItem.title="Bookkeeping"
+        if purpose == ""{
+            purpose = "Select Expense Purpose"
+        }
         purposeButton.setTitle(purpose, forState: .Normal)
     }
     
@@ -68,7 +71,8 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     }
     
     @IBAction func submit(sender: AnyObject) {
-        
+        let attendees = attendeesTF.text!
+        let notes = notesTF.text!
     }
     
 }

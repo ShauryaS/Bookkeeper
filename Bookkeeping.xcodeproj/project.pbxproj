@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4925B1CB1D36C095007E40B4 /* DLRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4925B1C91D36C095007E40B4 /* DLRadioButton.m */; };
 		4925B1CC1D36C095007E40B4 /* UploadReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4925B1CA1D36C095007E40B4 /* UploadReceiptView.swift */; };
 		494C29731D3810FF00008D6A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494C29721D3810FF00008D6A /* SettingsView.swift */; };
 		494DE44E1D38535A001EA8C7 /* SelectPurposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DE44D1D38535A001EA8C7 /* SelectPurposeView.swift */; };
 		49DA21141D3517F1006FE98C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA21131D3517F1006FE98C /* AppDelegate.swift */; };
-		49DA21161D3517F1006FE98C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA21151D3517F1006FE98C /* ViewController.swift */; };
 		49DA21191D3517F1006FE98C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DA21171D3517F1006FE98C /* Main.storyboard */; };
 		49DA211B1D3517F1006FE98C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DA211A1D3517F1006FE98C /* Assets.xcassets */; };
 		49DA211E1D3517F1006FE98C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DA211C1D3517F1006FE98C /* LaunchScreen.storyboard */; };
@@ -39,15 +37,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4925B1C71D36C095007E40B4 /* Bookkeeping-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bookkeeping-Bridging-Header.h"; sourceTree = "<group>"; };
-		4925B1C81D36C095007E40B4 /* DLRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLRadioButton.h; sourceTree = "<group>"; };
-		4925B1C91D36C095007E40B4 /* DLRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLRadioButton.m; sourceTree = "<group>"; };
 		4925B1CA1D36C095007E40B4 /* UploadReceiptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadReceiptView.swift; sourceTree = "<group>"; };
 		494C29721D3810FF00008D6A /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		494DE44D1D38535A001EA8C7 /* SelectPurposeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPurposeView.swift; sourceTree = "<group>"; };
+		497B93E51D399312000F1A51 /* Bookkeeping-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bookkeeping-Bridging-Header.h"; sourceTree = "<group>"; };
 		49DA21101D3517F1006FE98C /* Bookkeeping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookkeeping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DA21131D3517F1006FE98C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		49DA21151D3517F1006FE98C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		49DA21181D3517F1006FE98C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49DA211A1D3517F1006FE98C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49DA211D1D3517F1006FE98C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -110,13 +105,10 @@
 			isa = PBXGroup;
 			children = (
 				49DA21131D3517F1006FE98C /* AppDelegate.swift */,
-				49DA21151D3517F1006FE98C /* ViewController.swift */,
 				49DA21171D3517F1006FE98C /* Main.storyboard */,
 				49DA211A1D3517F1006FE98C /* Assets.xcassets */,
 				49DA211C1D3517F1006FE98C /* LaunchScreen.storyboard */,
-				4925B1C71D36C095007E40B4 /* Bookkeeping-Bridging-Header.h */,
-				4925B1C81D36C095007E40B4 /* DLRadioButton.h */,
-				4925B1C91D36C095007E40B4 /* DLRadioButton.m */,
+				497B93E51D399312000F1A51 /* Bookkeeping-Bridging-Header.h */,
 				4925B1CA1D36C095007E40B4 /* UploadReceiptView.swift */,
 				49DA211F1D3517F1006FE98C /* Info.plist */,
 				49DA21411D351841006FE98C /* LoginView.swift */,
@@ -280,8 +272,6 @@
 			files = (
 				494DE44E1D38535A001EA8C7 /* SelectPurposeView.swift in Sources */,
 				49DA21421D351841006FE98C /* LoginView.swift in Sources */,
-				4925B1CB1D36C095007E40B4 /* DLRadioButton.m in Sources */,
-				49DA21161D3517F1006FE98C /* ViewController.swift in Sources */,
 				494C29731D3810FF00008D6A /* SettingsView.swift in Sources */,
 				4925B1CC1D36C095007E40B4 /* UploadReceiptView.swift in Sources */,
 				49DA21141D3517F1006FE98C /* AppDelegate.swift in Sources */,

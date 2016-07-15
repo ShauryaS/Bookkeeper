@@ -13,6 +13,8 @@ class LogInView: UIViewController{
     
     @IBOutlet var emailUserTF: UITextField!
     @IBOutlet var passwordTF: UITextField!
+    @IBOutlet var rememberMeButton: UIButton!
+    private var selected = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +44,20 @@ class LogInView: UIViewController{
     }
 
     @IBAction func signIn(sender: AnyObject) {
+        let username = emailUserTF.text!
+        let password = passwordTF.text!
         self.performSegueWithIdentifier("LogToMainSegue", sender: sender)
+    }
+    
+    @IBAction func remember(sender: AnyObject) {
+        if selected == false{
+            rememberMeButton.selected = true
+            selected = true
+        }
+        else{
+            rememberMeButton.selected = false
+            selected = false
+        }
     }
     
 }
