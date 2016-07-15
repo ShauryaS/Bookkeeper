@@ -9,11 +9,18 @@
 import Foundation
 import UIKit
 
-class SelectPurposeView: UIViewController{
+class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
+    
+    @IBOutlet var pickerView: UIPickerView!
+    private var valSelected = ""
+    
+    var pickerDataSource = ["Select Expense Purpose", "Advertising", "Car and truck", "Commissions and fees", "Contact Labor", "Depletion", "Depreciation", "Employee Benefits", "Insurance", "Interest", "Meals and entertainment", "Office expense", "Other", "Pension and Profit Sharing", "Professional Services", "Rent or Lease", "Repairs or maintenence", "Supplies", "Taxes or licenses", "Travel", "Utilities", "Wages"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title="Select Expense Purpose"
+        pickerView.dataSource = self;
+        pickerView.delegate = self;
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -31,8 +38,38 @@ class SelectPurposeView: UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerDataSource.count;
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerDataSource[row]
+    }
+    
     @IBAction func choose(sender: AnyObject) {
+        
         self.performSegueWithIdentifier("SelectToMainSegue", sender: sender)
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        // selected value in Uipickerview in Swift
+        let value=pickerDataSource[row]
+        valSelected = value
+        if valSelected == ""{
+            valSelected = "Select Expense Purpose"
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if "SelectToMainSegue"==segue.identifier{
+            let yourNextViewController = (segue.destinationViewController as! UploadReceiptView)
+            yourNextViewController.purpose = valSelected
+        }
     }
     
 }

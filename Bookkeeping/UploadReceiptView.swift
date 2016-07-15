@@ -16,6 +16,8 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     @IBOutlet var notesTF: UITextField!
     @IBOutlet var imageView: UIImageView!
     var imagePicker: UIImagePickerController!
+    @IBOutlet var purposeButton: UIButton!
+    var purpose = "Select Expense Purpose"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogInView.dismissKeyboard))
         view.addGestureRecognizer(tap)
         navigationItem.title="Bookkeeping"
+        purposeButton.setTitle(purpose, forState: .Normal)
     }
     
     //Calls this function when the tap is recognized.
