@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49196AAD1D3B10B90038E363 /* Params.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49196AAC1D3B10B90038E363 /* Params.swift */; };
 		4925B1CC1D36C095007E40B4 /* UploadReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4925B1CA1D36C095007E40B4 /* UploadReceiptView.swift */; };
 		494C29731D3810FF00008D6A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494C29721D3810FF00008D6A /* SettingsView.swift */; };
 		494DE44E1D38535A001EA8C7 /* SelectPurposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DE44D1D38535A001EA8C7 /* SelectPurposeView.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49196AAC1D3B10B90038E363 /* Params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Params.swift; sourceTree = "<group>"; };
 		4925B1CA1D36C095007E40B4 /* UploadReceiptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadReceiptView.swift; sourceTree = "<group>"; };
 		494C29721D3810FF00008D6A /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		494DE44D1D38535A001EA8C7 /* SelectPurposeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPurposeView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				49DA21411D351841006FE98C /* LoginView.swift */,
 				494C29721D3810FF00008D6A /* SettingsView.swift */,
 				494DE44D1D38535A001EA8C7 /* SelectPurposeView.swift */,
+				49196AAC1D3B10B90038E363 /* Params.swift */,
 			);
 			path = Bookkeeping;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				494DE44E1D38535A001EA8C7 /* SelectPurposeView.swift in Sources */,
 				49DA21421D351841006FE98C /* LoginView.swift in Sources */,
 				494C29731D3810FF00008D6A /* SettingsView.swift in Sources */,
+				49196AAD1D3B10B90038E363 /* Params.swift in Sources */,
 				4925B1CC1D36C095007E40B4 /* UploadReceiptView.swift in Sources */,
 				49DA21141D3517F1006FE98C /* AppDelegate.swift in Sources */,
 			);
