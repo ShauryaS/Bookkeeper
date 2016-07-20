@@ -1,0 +1,6 @@
+framework module Pods_BookkeepingUITests {
+  umbrella header "Pods-BookkeepingUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

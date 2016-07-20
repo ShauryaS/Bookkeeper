@@ -51,7 +51,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ze-C0-lIZ">
-                                <rect key="frame" x="20" y="268" width="560" height="30"/>
+                                <rect key="frame" x="25" y="268" width="555" height="30"/>
                                 <state key="normal" title="Remember me">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -74,7 +74,7 @@
                             <constraint firstItem="NtJ-PX-Mbb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="YHe-i8-2SF"/>
                             <constraint firstItem="j8d-1s-R9J" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="bWy-Mw-BPT"/>
                             <constraint firstItem="Rdw-pk-9u7" firstAttribute="top" secondItem="NtJ-PX-Mbb" secondAttribute="bottom" constant="120" id="k1k-3R-iAN"/>
-                            <constraint firstItem="3Ze-C0-lIZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="mZZ-bf-Ryj"/>
+                            <constraint firstItem="3Ze-C0-lIZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="mZZ-bf-Ryj"/>
                             <constraint firstItem="8g0-6W-Arx" firstAttribute="top" secondItem="Rdw-pk-9u7" secondAttribute="bottom" constant="20" id="s9w-O5-7H5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3Ze-C0-lIZ" secondAttribute="trailing" id="tzH-P7-GOI"/>
                         </constraints>

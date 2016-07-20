@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftHTTP
 
 class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     

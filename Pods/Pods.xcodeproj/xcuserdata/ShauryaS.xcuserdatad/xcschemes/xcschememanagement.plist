@@ -3,8 +3,50 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
-	<dict/>
+	<dict>
+		<key>Pods-Bookkeeping.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-BookkeepingTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-BookkeepingUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftHTTP.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict/>
+	<dict>
+		<key>0EA9F067EFC6BBA071E2BC1870AF7FEC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3497E4867BC4040F000A62C43D12B3FD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C859494A85033491C56928902E7F5B61</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E2255F823AA2502A0E10504CEA479A9E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
 </dict>
 </plist>

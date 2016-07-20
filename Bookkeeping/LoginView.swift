@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftHTTP
 
 class LogInView: UIViewController{
     
@@ -46,7 +47,23 @@ class LogInView: UIViewController{
     @IBAction func signIn(sender: AnyObject) {
         let username = emailUserTF.text!
         let password = passwordTF.text!
-        self.performSegueWithIdentifier("LogToMainSegue", sender: sender)
+        let params = ["sb[username]":username, "sb[pass]":password]
+        if username != "" && password != ""{
+            do {
+                let opt = try HTTP.POST(url+"login", parameters: params)
+                opt.start { response in
+                    self.performSegueWithIdentifier("LogToMainSegue", sender: sender)
+                }
+            } catch let error{
+                print("got an error creating the request: \(error)")
+            }
+        }
+        else{
+            let alert = UIAlertController(title: "Login Failed", message: "Enter Email and Password.", preferredStyle: UIAlertControllerStyle.Alert)
+            let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func remember(sender: AnyObject) {
