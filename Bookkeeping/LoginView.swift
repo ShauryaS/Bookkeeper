@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftHTTP
+import JSONJoy
 
 class LogInView: UIViewController{
     
@@ -47,9 +48,34 @@ class LogInView: UIViewController{
     @IBAction func signIn(sender: AnyObject) {
         let username = emailUserTF.text!
         let password = passwordTF.text!
-        let params = ["upload?v=2&u=":username, "&p=":password]
         if username != "" && password != ""{
-           
+            struct Response: JSONJoy {
+                let status: String?
+                let error: String?
+                init(_ decoder: JSONDecoder) {
+                    status = decoder["OK"].string
+                    error = decoder["errno"].string
+                    //print(Response(JSONDecoder(response.data)))
+                    //print("opt finished: \(response.description)")
+                }
+            }
+            do {
+                let opt = try HTTP.GET(url+"/upload?v=2&u="+username+"&p="+password)
+                opt.start { response in
+                    if let err = response.error {
+                        print("error: \(err.localizedDescription)")
+                        return //also notify app of failure as needed
+                    }
+                    do {
+                        let user = try User(JSONDecoder(response.description))
+                        print("city is: \(user.ok)")
+                    } catch {
+                        print("unable to parse the JSON")
+                    }
+                }
+            } catch let error {
+                print("got an error creating the request: \(error)")
+            }
         }
         else{
             let alert = UIAlertController(title: "Login Failed", message: "Enter Email and Password.", preferredStyle: UIAlertControllerStyle.Alert)

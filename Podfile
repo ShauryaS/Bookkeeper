@@ -9,6 +9,11 @@ target 'Bookkeeping' do
 
   pod 'SwiftHTTP', '~> 1.0.4'
 
+  source 'https://github.com/CocoaPods/Specs.git'
+  use_frameworks!
+
+  pod 'JSONJoy-Swift', '~> 2.0.0'
+
   target 'BookkeepingTests' do
     inherit! :search_paths
     # Pods for testing
