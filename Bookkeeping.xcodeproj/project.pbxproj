@@ -44,6 +44,8 @@
 		0B00944B4B85899AB765E80F /* Pods-BookkeepingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookkeepingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookkeepingTests/Pods-BookkeepingTests.release.xcconfig"; sourceTree = "<group>"; };
 		40AB936FB4A0962A68A876E2 /* Pods-BookkeepingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookkeepingUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookkeepingUITests/Pods-BookkeepingUITests.release.xcconfig"; sourceTree = "<group>"; };
 		49196AAC1D3B10B90038E363 /* Params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Params.swift; sourceTree = "<group>"; };
+		491AA3DD1D42D003000470F9 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = "Pods/../build/Release-iphoneos/SwiftHTTP/SwiftHTTP.framework"; sourceTree = "<group>"; };
+		491AA3DF1D42D009000470F9 /* JSONJoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONJoy.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Bookkeeping-fhplacujbaftmqgtjhqfevgmlljc/Build/Products/Debug-iphonesimulator/JSONJoy-Swift/JSONJoy.framework"; sourceTree = "<group>"; };
 		4925B1CA1D36C095007E40B4 /* UploadReceiptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadReceiptView.swift; sourceTree = "<group>"; };
 		494C29721D3810FF00008D6A /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		494DE44D1D38535A001EA8C7 /* SelectPurposeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPurposeView.swift; sourceTree = "<group>"; };
@@ -173,6 +175,8 @@
 		FDA785BC41B20766AA6523C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				491AA3DF1D42D009000470F9 /* JSONJoy.framework */,
+				491AA3DD1D42D003000470F9 /* SwiftHTTP.framework */,
 				49BC309C1D3EA78E000EDAD1 /* SwiftHTTP.framework */,
 				CADB4A1F5A20916D8A526531 /* Pods_Bookkeeping.framework */,
 				77ABA61A5FA828B3471717E4 /* Pods_BookkeepingTests.framework */,
@@ -613,6 +617,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Release-iphoneos/SwiftHTTP",
+				);
 				INFOPLIST_FILE = Bookkeeping/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -629,6 +637,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Release-iphoneos/SwiftHTTP",
+				);
 				INFOPLIST_FILE = Bookkeeping/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
