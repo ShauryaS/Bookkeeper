@@ -55,8 +55,6 @@ class LogInView: UIViewController{
                 init(_ decoder: JSONDecoder) {
                     status = decoder["OK"].string
                     error = decoder["errno"].string
-                    //print(Response(JSONDecoder(response.data)))
-                    //print("opt finished: \(response.description)")
                 }
             }
             do {
