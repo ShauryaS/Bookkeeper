@@ -8,4 +8,4 @@
 
 import Foundation
 
-let url = "https://cfo-online.com/"
+let url = "https://cfo-online.com"

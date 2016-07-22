@@ -19,6 +19,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     var imagePicker: UIImagePickerController!
     @IBOutlet var purposeButton: UIButton!
     var purpose = "Select Expense Purpose"
+    var accountID = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()

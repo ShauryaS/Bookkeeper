@@ -47,16 +47,9 @@ class LogInView: UIViewController{
     @IBAction func signIn(sender: AnyObject) {
         let username = emailUserTF.text!
         let password = passwordTF.text!
-        let params = ["sb[username]":username, "sb[pass]":password]
+        let params = ["upload?v=2&u=":username, "&p=":password]
         if username != "" && password != ""{
-            do {
-                let opt = try HTTP.POST(url+"login", parameters: params)
-                opt.start { response in
-                    self.performSegueWithIdentifier("LogToMainSegue", sender: sender)
-                }
-            } catch let error{
-                print("got an error creating the request: \(error)")
-            }
+           
         }
         else{
             let alert = UIAlertController(title: "Login Failed", message: "Enter Email and Password.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -65,6 +58,29 @@ class LogInView: UIViewController{
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
+    
+    /*func getAccountID() -> String{
+        do {
+            let opt = try HTTP.GET("https://google.com")
+            opt.start { response in
+                if let err = response.error {
+                    print("error: \(err.localizedDescription)")
+                    return //also notify app of failure as needed
+                }
+                print("opt finished: \(response.description)")
+                //print("data is: \(response.data)") access the response of the data with response.data
+            }
+        } catch let error {
+            print("got an error creating the request: \(error)")
+        }
+    }*/
+    
+    /*override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if "LogToMainSegue"==segue.identifier{
+            let yourNextViewController = (segue.destinationViewController as! UploadReceiptView)
+            //yourNextViewController.accountID = getAccountID()
+        }
+    }*/
     
     @IBAction func remember(sender: AnyObject) {
         if selected == false{

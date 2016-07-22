@@ -11,8 +11,6 @@
 		4925B1CC1D36C095007E40B4 /* UploadReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4925B1CA1D36C095007E40B4 /* UploadReceiptView.swift */; };
 		494C29731D3810FF00008D6A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494C29721D3810FF00008D6A /* SettingsView.swift */; };
 		494DE44E1D38535A001EA8C7 /* SelectPurposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494DE44D1D38535A001EA8C7 /* SelectPurposeView.swift */; };
-		49BC309D1D3EA78E000EDAD1 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BC309C1D3EA78E000EDAD1 /* SwiftHTTP.framework */; };
-		49BC309F1D3EA7CB000EDAD1 /* SwiftHTTP.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 49BC309C1D3EA78E000EDAD1 /* SwiftHTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		49DA21141D3517F1006FE98C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA21131D3517F1006FE98C /* AppDelegate.swift */; };
 		49DA21191D3517F1006FE98C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DA21171D3517F1006FE98C /* Main.storyboard */; };
 		49DA211B1D3517F1006FE98C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DA211A1D3517F1006FE98C /* Assets.xcassets */; };
@@ -41,20 +39,6 @@
 			remoteInfo = Bookkeeping;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		49BC309E1D3EA79A000EDAD1 /* Copy Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				49BC309F1D3EA7CB000EDAD1 /* SwiftHTTP.framework in Copy Frameworks */,
-			);
-			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0B00944B4B85899AB765E80F /* Pods-BookkeepingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookkeepingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookkeepingTests/Pods-BookkeepingTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -92,7 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49BC309D1D3EA78E000EDAD1 /* SwiftHTTP.framework in Frameworks */,
 				C643C56B84210135B3B9FE3F /* Pods_Bookkeeping.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,7 +194,6 @@
 				49DA210E1D3517F1006FE98C /* Resources */,
 				7D120935A806C6BCC3F26658 /* [CP] Embed Pods Frameworks */,
 				37E4D30AB7656CD756E432A3 /* [CP] Copy Pods Resources */,
-				49BC309E1D3EA79A000EDAD1 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
