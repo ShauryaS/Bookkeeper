@@ -64,12 +64,12 @@ class LogInView: UIViewController{
                         print("error: \(err.localizedDescription)")
                         return //also notify app of failure as needed
                     }
-                    do {
-                        let user = try User(JSONDecoder(response.description))
-                        print("city is: \(user.ok)")
+                    /*do {
+                        let user = try User(JSONDecoder(response.data))
+                        print("\(user.ok)")
                     } catch {
                         print("unable to parse the JSON")
-                    }
+                    }*/
                 }
             } catch let error {
                 print("got an error creating the request: \(error)")
