@@ -8,7 +8,6 @@ target 'Bookkeeping' do
   use_frameworks!
 
   pod 'SwiftHTTP', '~> 1.0.4'
-  pod 'JSONJoy-Swift', '~> 2.0.0'
 
   target 'BookkeepingTests' do
     inherit! :search_paths

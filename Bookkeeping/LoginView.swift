@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import SwiftHTTP
-import JSONJoy
 
 class LogInView: UIViewController{
     
@@ -17,6 +16,7 @@ class LogInView: UIViewController{
     @IBOutlet var passwordTF: UITextField!
     @IBOutlet var rememberMeButton: UIButton!
     private var selected = false
+    var jsonString = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,31 +49,28 @@ class LogInView: UIViewController{
         let username = emailUserTF.text!
         let password = passwordTF.text!
         if username != "" && password != ""{
-            struct Response: JSONJoy {
-                let status: String?
-                let error: String?
-                init(_ decoder: JSONDecoder) {
-                    status = decoder["OK"].string
-                    error = decoder["errno"].string
-                }
-            }
             do {
-                let opt = try HTTP.GET(url+"/upload?v=2&u="+username+"&p="+password)
+                let opt = try HTTP.POST(url+"/upload?v=2&u="+username+"&p="+password)
                 opt.start { response in
                     if let err = response.error {
                         print("error: \(err.localizedDescription)")
                         return //also notify app of failure as needed
                     }
-                    /*do {
-                        let user = try User(JSONDecoder(response.data))
-                        print("\(user.ok)")
+                    self.jsonString = String(data: response.data, encoding: NSUTF8StringEncoding)!
+                    /*let data: NSData = self.jsonString.dataUsingEncoding(NSUTF8StringEncoding)!
+                    do{
+                        let anyObj: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0))
+                        list = self.parseJson(anyObj!)
                     } catch {
-                        print("unable to parse the JSON")
+                        print("Error: \(error)")
                     }*/
                 }
             } catch let error {
                 print("got an error creating the request: \(error)")
             }
+            //if ok{
+                //self.performSegueWithIdentifier("LogToMainSegue", sender: nil)
+            //}
         }
         else{
             let alert = UIAlertController(title: "Login Failed", message: "Enter Email and Password.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -83,27 +80,16 @@ class LogInView: UIViewController{
         }
     }
     
-    /*func getAccountID() -> String{
-        do {
-            let opt = try HTTP.GET("https://google.com")
-            opt.start { response in
-                if let err = response.error {
-                    print("error: \(err.localizedDescription)")
-                    return //also notify app of failure as needed
-                }
-                print("opt finished: \(response.description)")
-                //print("data is: \(response.data)") access the response of the data with response.data
+    /*func parseJson(anyObj:AnyObject) -> Array<User>{
+        var list:Array<User> = []
+        if  anyObj is Array<AnyObject> {
+            var u:User = User()
+            for json in anyObj as! Array<AnyObject>{
+                u.ok = (json["OK"] as AnyObject? as? Bool)!
+                list.append(u)
             }
-        } catch let error {
-            print("got an error creating the request: \(error)")
         }
-    }*/
-    
-    /*override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if "LogToMainSegue"==segue.identifier{
-            let yourNextViewController = (segue.destinationViewController as! UploadReceiptView)
-            //yourNextViewController.accountID = getAccountID()
-        }
+        return list
     }*/
     
     @IBAction func remember(sender: AnyObject) {

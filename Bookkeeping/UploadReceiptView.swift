@@ -75,6 +75,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     @IBAction func submit(sender: AnyObject) {
         let attendees = attendeesTF.text!
         let notes = notesTF.text!
+        
     }
     
 }

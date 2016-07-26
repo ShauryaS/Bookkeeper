@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>JSONJoy-Swift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Bookkeeping.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,12 +32,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8AD42873602CCA21268367ADF5C16A6A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>97EEB96DBC46FCB54064ECBEBAEA7F35</key>
+		<key>3497E4867BC4040F000A62C43D12B3FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +42,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E0EF0494697DC7F311A3D85B4031BE7E</key>
+		<key>E2255F823AA2502A0E10504CEA479A9E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
