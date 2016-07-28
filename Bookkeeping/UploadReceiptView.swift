@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftHTTP
 
-class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {//When going to selection screens, send all data there and back; for making sure current data entered is saved; should not be a universal param
     
     @IBOutlet var accountIDLab: UILabel!
     @IBOutlet var attendeesTF: UITextField!
@@ -18,9 +18,10 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     @IBOutlet var imageView: UIImageView!
     var imagePicker: UIImagePickerController!
     @IBOutlet var purposeButton: UIButton!
+    @IBOutlet var typeButton: UIButton!
     var purpose = "Select Expense Purpose"
-    var accountID = ""
-
+    var type = "Select Expense Type"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let nav = self.navigationController?.navigationBar
@@ -31,6 +32,10 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         if purpose == ""{
             purpose = "Select Expense Purpose"
         }
+        if type == ""{
+            type = "Select Expense Purpose"
+        }
+        accountIDLab.text = acctNum
         purposeButton.setTitle(purpose, forState: .Normal)
     }
     

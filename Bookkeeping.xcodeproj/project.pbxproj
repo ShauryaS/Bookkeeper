@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4908E3521D49F03800558C9D /* SelectTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908E3511D49F03800558C9D /* SelectTypeView.swift */; };
 		49196AAD1D3B10B90038E363 /* Params.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49196AAC1D3B10B90038E363 /* Params.swift */; };
 		4925B1CC1D36C095007E40B4 /* UploadReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4925B1CA1D36C095007E40B4 /* UploadReceiptView.swift */; };
 		494C29731D3810FF00008D6A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494C29721D3810FF00008D6A /* SettingsView.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		0B00944B4B85899AB765E80F /* Pods-BookkeepingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookkeepingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookkeepingTests/Pods-BookkeepingTests.release.xcconfig"; sourceTree = "<group>"; };
 		40AB936FB4A0962A68A876E2 /* Pods-BookkeepingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookkeepingUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookkeepingUITests/Pods-BookkeepingUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4908E3511D49F03800558C9D /* SelectTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectTypeView.swift; sourceTree = "<group>"; };
 		49196AAC1D3B10B90038E363 /* Params.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Params.swift; sourceTree = "<group>"; };
 		491AA3DD1D42D003000470F9 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = "Pods/../build/Release-iphoneos/SwiftHTTP/SwiftHTTP.framework"; sourceTree = "<group>"; };
 		491AA3DF1D42D009000470F9 /* JSONJoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONJoy.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/Bookkeeping-fhplacujbaftmqgtjhqfevgmlljc/Build/Products/Debug-iphonesimulator/JSONJoy-Swift/JSONJoy.framework"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				494C29721D3810FF00008D6A /* SettingsView.swift */,
 				494DE44D1D38535A001EA8C7 /* SelectPurposeView.swift */,
 				49196AAC1D3B10B90038E363 /* Params.swift */,
+				4908E3511D49F03800558C9D /* SelectTypeView.swift */,
 			);
 			path = Bookkeeping;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 			files = (
 				494DE44E1D38535A001EA8C7 /* SelectPurposeView.swift in Sources */,
 				49DA21421D351841006FE98C /* LoginView.swift in Sources */,
+				4908E3521D49F03800558C9D /* SelectTypeView.swift in Sources */,
 				494C29731D3810FF00008D6A /* SettingsView.swift in Sources */,
 				49196AAD1D3B10B90038E363 /* Params.swift in Sources */,
 				4925B1CC1D36C095007E40B4 /* UploadReceiptView.swift in Sources */,

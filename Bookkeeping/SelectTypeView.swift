@@ -1,24 +1,24 @@
 //
-//  SelectPurposeView.swift
+//  SelectTypeView.swift
 //  Bookkeeping
 //
-//  Created by Shaurya Srivastava on 7/14/16.
+//  Created by Shaurya Srivastava on 7/28/16.
 //  Copyright © 2016 Shaurya Srivastava. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
+class SelectTypeView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
     
     @IBOutlet var pickerView: UIPickerView!
     private var valSelected = ""
     
-    var pickerDataSource = ["Select Expense Purpose", "Building", "Computer Equipment", "Furniture & Fixtures", "Land", "Leasehold Improvement", "Office Equipment", "Other", "Plant & Machinery", "Vehicles"]
+    var pickerDataSource = ["Select Type Purpose", "Asset", "Cost", "Expense", "Income", "Other", "Statement"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title="Select Expense Purpose"
+        navigationItem.title="Select Type Purpose"
         pickerView.dataSource = self;
         pickerView.delegate = self;
     }
@@ -51,7 +51,7 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     }
     
     @IBAction func choose(sender: AnyObject) {
-        self.performSegueWithIdentifier("SelectToMainSegue", sender: sender)
+        self.performSegueWithIdentifier("TypeToMainSegue", sender: sender)
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
@@ -62,7 +62,7 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if "SelectToMainSegue"==segue.identifier{
+        if "TypeToMainSegue"==segue.identifier{
             let yourNextViewController = (segue.destinationViewController as! UploadReceiptView)
             yourNextViewController.purpose = valSelected
         }

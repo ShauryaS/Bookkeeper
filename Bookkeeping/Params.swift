@@ -9,11 +9,10 @@
 import Foundation
 
 let url = "https://cfo-online.com"
-var list:Array<User> = []
+var auth = 3
+var acctNum = ""
 struct User{
-    var ok:Bool
-    var errno:Int
-    var errmsg:String
-    var msg:String
-    var accts:String
+    var ok:Int?
+    var accts:String?
+    init(){}
 }
