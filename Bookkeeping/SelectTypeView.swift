@@ -13,12 +13,15 @@ class SelectTypeView: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet var pickerView: UIPickerView!
     private var valSelected = ""
+    var purposeLabel = ""
+    var notes = ""
+    var attendees = ""
     
-    var pickerDataSource = ["Select Type Purpose", "Asset", "Cost", "Expense", "Income", "Other", "Statement"]
+    var pickerDataSource = ["Select Expense Type", "Asset", "Cost", "Expense", "Income", "Other", "Statement"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title="Select Type Purpose"
+        navigationItem.title="Select Expense Type"
         pickerView.dataSource = self;
         pickerView.delegate = self;
     }
@@ -64,7 +67,14 @@ class SelectTypeView: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if "TypeToMainSegue"==segue.identifier{
             let yourNextViewController = (segue.destinationViewController as! UploadReceiptView)
-            yourNextViewController.purpose = valSelected
+            yourNextViewController.type = valSelected
+            yourNextViewController.purpose = purposeLabel
+            if notes != ""{
+                yourNextViewController.notesText = notes
+            }
+            if attendees != ""{
+                yourNextViewController.attendeesText = attendees
+            }
         }
     }
     

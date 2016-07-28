@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftHTTP
 
-class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {//When going to selection screens, send all data there and back; for making sure current data entered is saved; should not be a universal param
+class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet var accountIDLab: UILabel!
     @IBOutlet var attendeesTF: UITextField!
@@ -21,6 +21,8 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     @IBOutlet var typeButton: UIButton!
     var purpose = "Select Expense Purpose"
     var type = "Select Expense Type"
+    var notesText = ""
+    var attendeesText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +35,17 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
             purpose = "Select Expense Purpose"
         }
         if type == ""{
-            type = "Select Expense Purpose"
+            type = "Select Expense Type"
+        }
+        if notesText != ""{
+            notesTF.text = notesText
+        }
+        if attendeesText != ""{
+            attendeesTF.text = attendeesText
         }
         accountIDLab.text = acctNum
         purposeButton.setTitle(purpose, forState: .Normal)
+        typeButton.setTitle(type, forState: .Normal)
     }
     
     //Calls this function when the tap is recognized.
@@ -77,9 +86,44 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         self.dismissViewControllerAnimated(true, completion: nil);
     }
     
+    @IBAction func selectType(sender: AnyObject) {
+        attendeesText = attendeesTF.text!
+        notesText = notesTF.text!
+        self.performSegueWithIdentifier("MainToTypeSegue", sender: sender)
+    }
+    
+    @IBAction func selectPurpose(sender: AnyObject) {
+        attendeesText = attendeesTF.text!
+        notesText = notesTF.text!
+        self.performSegueWithIdentifier("MainToPurposeSegue", sender: sender)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if "MainToTypeSegue"==segue.identifier{
+            let yourNextViewController = (segue.destinationViewController as! SelectTypeView)
+            yourNextViewController.purposeLabel = purpose
+            if notesText != ""{
+                yourNextViewController.notes = notesText
+            }
+            if attendeesText != ""{
+                yourNextViewController.attendees = attendeesText
+            }
+        }
+        if "MainToPurposeSegue"==segue.identifier{
+            let yourNextViewController = (segue.destinationViewController as! SelectPurposeView)
+            yourNextViewController.typeLabel = type
+            if notesText != ""{
+                yourNextViewController.notes = notesText
+            }
+            if attendeesText != ""{
+                yourNextViewController.attendees = attendeesText
+            }
+        }
+    }
+    
     @IBAction func submit(sender: AnyObject) {
-        let attendees = attendeesTF.text!
-        let notes = notesTF.text!
+        attendeesText = attendeesTF.text!
+        notesText = notesTF.text!
         
     }
     

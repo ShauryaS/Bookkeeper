@@ -13,6 +13,9 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     @IBOutlet var pickerView: UIPickerView!
     private var valSelected = ""
+    var typeLabel = ""
+    var notes = ""
+    var attendees = ""
     
     var pickerDataSource = ["Select Expense Purpose", "Building", "Computer Equipment", "Furniture & Fixtures", "Land", "Leasehold Improvement", "Office Equipment", "Other", "Plant & Machinery", "Vehicles"]
     
@@ -65,6 +68,13 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
         if "SelectToMainSegue"==segue.identifier{
             let yourNextViewController = (segue.destinationViewController as! UploadReceiptView)
             yourNextViewController.purpose = valSelected
+            yourNextViewController.type = typeLabel
+            if notes != ""{
+                yourNextViewController.notesText = notes
+            }
+            if attendees != ""{
+                yourNextViewController.attendeesText = attendees
+            }
         }
     }
     

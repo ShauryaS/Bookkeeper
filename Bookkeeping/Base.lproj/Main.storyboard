@@ -61,6 +61,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.50196081400000003" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="j8d-1s-R9J" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="27g-z4-4tE"/>
                             <constraint firstItem="8g0-6W-Arx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="2XX-Fa-II8"/>
@@ -153,7 +154,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="VV7-ip-i2F" kind="show" identifier="MainToSelectSegue" id="PxQ-6e-XJa"/>
+                                    <action selector="selectPurpose:" destination="k9E-iR-RKn" eventType="touchUpInside" id="Nc7-ne-Rjk"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Type:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlP-nb-jTY">
@@ -174,7 +175,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="hBX-Jg-FKx" kind="show" identifier="MainToTypeSegue" id="nCh-C6-N0K"/>
+                                    <action selector="selectType:" destination="k9E-iR-RKn" eventType="touchUpInside" id="0bQ-1g-ivE"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zr-tO-e4W">
@@ -185,6 +186,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.50196081400000003" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Lh3-BB-0Sb" firstAttribute="top" secondItem="4Zr-tO-e4W" secondAttribute="bottom" constant="20" id="0kr-Fq-MdG"/>
                             <constraint firstItem="tlP-nb-jTY" firstAttribute="width" secondItem="ZiS-fM-VoM" secondAttribute="width" id="1uK-ze-nGl"/>
@@ -265,6 +267,8 @@
                         <outlet property="notesTF" destination="wP3-Am-JqL" id="d0J-E5-c6X"/>
                         <outlet property="purposeButton" destination="4Ez-LY-syR" id="rmS-kv-Lu7"/>
                         <outlet property="typeButton" destination="Lh3-BB-0Sb" id="iC5-Tv-7ct"/>
+                        <segue destination="hBX-Jg-FKx" kind="show" identifier="MainToTypeSegue" id="zyI-it-8Wy"/>
+                        <segue destination="VV7-ip-i2F" kind="show" identifier="MainToPurposeSegue" id="3CU-mH-PYf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fNf-pH-251" userLabel="First Responder" sceneMemberID="firstResponder"/>
