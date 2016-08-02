@@ -17,11 +17,29 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     var notes = ""
     var attendees = ""
     
-    var pickerDataSource = ["Select Expense Purpose", "Building", "Computer Equipment", "Furniture & Fixtures", "Land", "Leasehold Improvement", "Office Equipment", "Other", "Plant & Machinery", "Vehicles"]
+    var pickerDataSource = ["Select Expense Purpose"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title="Select Expense Purpose"
+        if typeLabel == "Asset"{
+            pickerDataSource = dataAsset
+        }
+        else if typeLabel == "Cost"{
+            pickerDataSource = dataCost
+        }
+        else if typeLabel == "Expense"{
+            pickerDataSource = dataExpense
+        }
+        else if typeLabel == "Income"{
+            pickerDataSource = dataIncome
+        }
+        else if typeLabel == "Other"{
+            pickerDataSource = dataOther
+        }
+        else if typeLabel == "Statement"{
+            pickerDataSource = dataStatement
+        }
         pickerView.dataSource = self;
         pickerView.delegate = self;
     }

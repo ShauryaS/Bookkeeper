@@ -40,6 +40,10 @@ class SettingsView: UIViewController{
     }
 
     @IBAction func logout(sender: AnyObject) {
+        auth = 3
+        acctNum = ""
+        username = ""
+        password = ""
         self.performSegueWithIdentifier("backToLogInSegue", sender: sender)
     }
     

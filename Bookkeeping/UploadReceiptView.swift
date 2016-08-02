@@ -19,10 +19,11 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     var imagePicker: UIImagePickerController!
     @IBOutlet var purposeButton: UIButton!
     @IBOutlet var typeButton: UIButton!
-    var purpose = "Select Expense Purpose"
-    var type = "Select Expense Type"
+    var purpose = dataAsset[0]
+    var type = "Asset"
     var notesText = ""
     var attendeesText = ""
+    var typeChanged = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +32,12 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogInView.dismissKeyboard))
         view.addGestureRecognizer(tap)
         navigationItem.title="Bookkeeping"
-        if purpose == ""{
-            purpose = "Select Expense Purpose"
-        }
         if type == ""{
-            type = "Select Expense Type"
+            type = "Asset"
+        }
+        if typeChanged{
+            choosePurposeLabel()
+            typeChanged = !typeChanged
         }
         if notesText != ""{
             notesTF.text = notesText
@@ -121,10 +123,54 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         }
     }
     
-    @IBAction func submit(sender: AnyObject) {
+    @IBAction func submit(sender: AnyObject) {//check upload method in SwiftHTTP for adding params to post
         attendeesText = attendeesTF.text!
         notesText = notesTF.text!
-        
+        let uuid = NSUUID().UUIDString
+        if let data = UIImageJPEGRepresentation(imageView.image!, 1.0) {
+            let filename = getDocumentsDirectory().stringByAppendingPathComponent(uuid+".jpg")
+            data.writeToFile(filename, atomically: true)
+        }
+        ///let fileUrl = NSURL(fileURLWithPath: "/Users/dalton/Desktop/testfile")
+        do {
+            let opt = try HTTP.POST(url+"/upload?v=2&u="+username+"&p="+password+"&a="+acctNum+"&purpose="+purpose+"&type="+type+"&attendees="+attendeesText+"&notes="+notesText)
+            opt.start { response in
+                print(response.URL)
+            }
+        } catch let error {
+            print("got an error creating the request: \(error)")
+        }
+    }
+    
+    func getDocumentsDirectory() -> NSString {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    func choosePurposeLabel(){
+        switch(type){
+            case "Asset":
+                purpose = dataAsset[0]
+                break
+            case "Cost":
+                purpose = dataCost[0]
+                break
+            case "Expense":
+                purpose = dataExpense[0]
+                break
+            case "Income":
+                purpose = dataIncome[0]
+                break
+            case "Other":
+                purpose = dataOther[0]
+                break
+            case "Statement":
+                purpose = dataStatement[0]
+                break
+            default:
+                break
+        }
     }
     
 }

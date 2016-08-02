@@ -45,11 +45,11 @@ class LogInView: UIViewController{
     }
 
     @IBAction func signIn(sender: AnyObject) {
-        let username = emailUserTF.text!
-        let password = passwordTF.text!
+        username = emailUserTF.text!
+        password = passwordTF.text!
         if username != "" && password != ""{
             connectToBackEnd(username, password: password)
-            sleep(1)
+            sleep(2)
             permitAuth()
         }
         else{

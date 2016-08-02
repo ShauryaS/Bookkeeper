@@ -17,7 +17,7 @@ class SelectTypeView: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     var notes = ""
     var attendees = ""
     
-    var pickerDataSource = ["Select Expense Type", "Asset", "Cost", "Expense", "Income", "Other", "Statement"]
+    var pickerDataSource = ["Asset", "Cost", "Expense", "Income", "Other", "Statement"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +69,7 @@ class SelectTypeView: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             let yourNextViewController = (segue.destinationViewController as! UploadReceiptView)
             yourNextViewController.type = valSelected
             yourNextViewController.purpose = purposeLabel
+            yourNextViewController.typeChanged = true
             if notes != ""{
                 yourNextViewController.notesText = notes
             }
