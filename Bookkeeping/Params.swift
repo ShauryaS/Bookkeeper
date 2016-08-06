@@ -20,9 +20,16 @@ var auth = 3
 var acctNum = ""
 var username = ""
 var password = ""
+var remember = false
 
 struct User{
     var ok:Int?
     var accts:String?
     init(){}
+}
+
+func getDocumentsDirectory() -> NSString {
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+    let documentsDirectory = paths[0]
+    return documentsDirectory
 }

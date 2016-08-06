@@ -130,14 +130,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     @IBAction func submit(sender: AnyObject) {
         //submitButton.titleLabel?.text! = "Uploading..."
         uploadAndGetResp()
-        sleep(1)
         handleResp()
-    }
-    
-    func getDocumentsDirectory() -> NSString {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
     }
     
     func choosePurposeLabel(){
@@ -197,28 +190,40 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         } catch let error {
             print("got an error creating the request: \(error)")
         }
+        while uploaded == nil{
+            sleep(1)
+        }
     }
     
     func handleResp(){
-        /*if uploaded == 1{
+        if uploaded == 1{
+            reset()
             let alert = UIAlertController(title: "Upload Success", message: "Successfuly Uploaded To Your Account", preferredStyle: UIAlertControllerStyle.Alert)
             let action = UIAlertAction(title: "Great", style: .Default, handler: nil)
             alert.addAction(action)
             self.presentViewController(alert, animated: true, completion: nil)
-            purpose = dataAsset[0]
-            type = "Asset"
-            notesText = ""
-            attendeesText = ""
-            typeChanged = false
-            img = UIImage()
-            viewDidLoad()
         }
         else{
             let alert = UIAlertController(title: "Upload Failed", message: "Please Try Again Later.", preferredStyle: UIAlertControllerStyle.Alert)
             let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
             alert.addAction(action)
             self.presentViewController(alert, animated: true, completion: nil)
-        }*/
+        }
+    }
+    
+    func reset() -> Void{
+        purpose = dataAsset[0]
+        type = "Asset"
+        notesText = ""
+        attendeesText = ""
+        typeChanged = false
+        img = UIImage()
+        imageView.image = img
+        uploaded = nil
+        purposeButton.setTitle(purpose, forState: .Normal)
+        typeButton.setTitle(type, forState: .Normal)
+        notesTF.text = notesText
+        attendeesTF.text = attendeesText
     }
     
 }

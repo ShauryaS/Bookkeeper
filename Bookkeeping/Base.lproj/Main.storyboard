@@ -121,21 +121,11 @@
                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nx-a5-R0q">
-                                <rect key="frame" x="20" y="540" width="560" height="30"/>
-                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Submit">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="submit:" destination="k9E-iR-RKn" eventType="touchUpInside" id="Gji-Mg-MrZ"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cCs-e0-RCk">
                                 <rect key="frame" x="50" y="290" width="500" height="230"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="500" id="hbX-fF-t5U"/>
-                                    <constraint firstAttribute="height" constant="230" id="mBq-sK-tJh"/>
+                                    <constraint firstAttribute="height" priority="750" constant="230" id="mBq-sK-tJh"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wP3-Am-JqL">
@@ -184,10 +174,21 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nx-a5-R0q">
+                                <rect key="frame" x="20" y="540" width="560" height="30"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="submit:" destination="k9E-iR-RKn" eventType="touchUpInside" id="Gji-Mg-MrZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.50196081400000003" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Ocq-N0-Zfa" firstAttribute="top" secondItem="9nx-a5-R0q" secondAttribute="bottom" constant="30" id="0Y1-8c-msQ"/>
                             <constraint firstItem="Lh3-BB-0Sb" firstAttribute="top" secondItem="4Zr-tO-e4W" secondAttribute="bottom" constant="20" id="0kr-Fq-MdG"/>
                             <constraint firstItem="tlP-nb-jTY" firstAttribute="width" secondItem="ZiS-fM-VoM" secondAttribute="width" id="1uK-ze-nGl"/>
                             <constraint firstItem="4Zr-tO-e4W" firstAttribute="height" secondItem="ZiS-fM-VoM" secondAttribute="height" id="2Bc-z9-Fqu"/>
@@ -234,7 +235,7 @@
                             <constraint firstItem="wP3-Am-JqL" firstAttribute="top" secondItem="ixY-K8-gzW" secondAttribute="bottom" constant="20" id="m53-s1-6YE"/>
                             <constraint firstItem="TYn-6b-GVh" firstAttribute="top" secondItem="7Wd-Ni-mhI" secondAttribute="bottom" constant="20" id="nLG-pD-sM8"/>
                             <constraint firstItem="9nx-a5-R0q" firstAttribute="leading" secondItem="q5N-FW-qBn" secondAttribute="leadingMargin" id="nmx-Oj-c9j"/>
-                            <constraint firstItem="9nx-a5-R0q" firstAttribute="top" secondItem="cCs-e0-RCk" secondAttribute="bottom" constant="20" id="o3T-yJ-6st"/>
+                            <constraint firstItem="9nx-a5-R0q" firstAttribute="top" secondItem="cCs-e0-RCk" secondAttribute="bottom" priority="250" constant="20" id="o3T-yJ-6st"/>
                             <constraint firstItem="4Zr-tO-e4W" firstAttribute="leading" secondItem="ZiS-fM-VoM" secondAttribute="trailing" constant="4" id="o9F-bk-O1P"/>
                             <constraint firstItem="tlP-nb-jTY" firstAttribute="leading" secondItem="q5N-FW-qBn" secondAttribute="leadingMargin" id="ona-Mv-tW8"/>
                             <constraint firstItem="j5E-4e-CZh" firstAttribute="height" secondItem="ZiS-fM-VoM" secondAttribute="height" id="r3n-Tb-quE"/>
