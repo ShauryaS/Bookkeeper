@@ -49,7 +49,7 @@ class LogInView: UIViewController{
         password = passwordTF.text!
         if username != "" && password != ""{
             connectToBackEnd(username, password: password)
-            sleep(2)
+            sleep(1)
             permitAuth()
         }
         else{

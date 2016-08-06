@@ -24,6 +24,9 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     var notesText = ""
     var attendeesText = ""
     var typeChanged = false
+    var img: UIImage!
+    var uploaded:Int?
+    @IBOutlet var submitButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +41,9 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         if typeChanged{
             choosePurposeLabel()
             typeChanged = !typeChanged
+        }
+        if purpose == ""{
+            choosePurposeLabel()
         }
         if notesText != ""{
             notesTF.text = notesText
@@ -74,18 +80,16 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     }
 
     @IBAction func takePhoto(sender: AnyObject) {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
-            imagePicker.allowsEditing = false
-            self.presentViewController(imagePicker, animated: true, completion: nil)
-        }
+        imagePicker =  UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .Camera
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        imageView.image = image
-        self.dismissViewControllerAnimated(true, completion: nil);
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+        img = info[UIImagePickerControllerOriginalImage] as? UIImage
+        imageView.image = img
     }
     
     @IBAction func selectType(sender: AnyObject) {
@@ -123,23 +127,11 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         }
     }
     
-    @IBAction func submit(sender: AnyObject) {//check upload method in SwiftHTTP for adding params to post
-        attendeesText = attendeesTF.text!
-        notesText = notesTF.text!
-        let uuid = NSUUID().UUIDString
-        if let data = UIImageJPEGRepresentation(imageView.image!, 1.0) {
-            let filename = getDocumentsDirectory().stringByAppendingPathComponent(uuid+".jpg")
-            data.writeToFile(filename, atomically: true)
-        }
-        ///let fileUrl = NSURL(fileURLWithPath: "/Users/dalton/Desktop/testfile")
-        do {
-            let opt = try HTTP.POST(url+"/upload?v=2&u="+username+"&p="+password+"&a="+acctNum+"&purpose="+purpose+"&type="+type+"&attendees="+attendeesText+"&notes="+notesText)
-            opt.start { response in
-                print(response.URL)
-            }
-        } catch let error {
-            print("got an error creating the request: \(error)")
-        }
+    @IBAction func submit(sender: AnyObject) {
+        //submitButton.titleLabel?.text! = "Uploading..."
+        uploadAndGetResp()
+        sleep(1)
+        handleResp()
     }
     
     func getDocumentsDirectory() -> NSString {
@@ -171,6 +163,62 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
             default:
                 break
         }
+    }
+    
+    func parseJson(anyObj:AnyObject){
+        if anyObj is NSDictionary {
+            uploaded = anyObj["OK"] as? Int!
+        }
+    }
+    
+    func uploadAndGetResp(){
+        attendeesText = attendeesTF.text!
+        notesText = notesTF.text!
+        var filepath = ""
+        let uuid = NSUUID().UUIDString
+        if let data = UIImageJPEGRepresentation(img, 1.0) {
+            filepath = getDocumentsDirectory().stringByAppendingPathComponent(uuid+".jpg")
+            data.writeToFile(filepath, atomically: true)
+        }
+        let fileurl = NSURL(fileURLWithPath: filepath)
+        let params = ["file": Upload(fileUrl: fileurl)]
+        do {
+            let opt = try HTTP.POST(url+"/upload?v=2&u="+username+"&p="+password+"&a="+acctNum+"&purpose="+purpose+"&type="+type+"&attendees="+attendeesText+"&notes="+notesText, parameters: params)
+            opt.start { response in
+                let jsonString = String(data: response.data, encoding: NSUTF8StringEncoding)
+                let data: NSData = (jsonString!.dataUsingEncoding(NSUTF8StringEncoding))!
+                do{
+                    let anyObj: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0))
+                    self.parseJson(anyObj!)
+                } catch {
+                    print("Error: \(error)")
+                }
+            }
+        } catch let error {
+            print("got an error creating the request: \(error)")
+        }
+    }
+    
+    func handleResp(){
+        /*if uploaded == 1{
+            let alert = UIAlertController(title: "Upload Success", message: "Successfuly Uploaded To Your Account", preferredStyle: UIAlertControllerStyle.Alert)
+            let action = UIAlertAction(title: "Great", style: .Default, handler: nil)
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+            purpose = dataAsset[0]
+            type = "Asset"
+            notesText = ""
+            attendeesText = ""
+            typeChanged = false
+            img = UIImage()
+            viewDidLoad()
+        }
+        else{
+            let alert = UIAlertController(title: "Upload Failed", message: "Please Try Again Later.", preferredStyle: UIAlertControllerStyle.Alert)
+            let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }*/
     }
     
 }
