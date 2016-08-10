@@ -25,7 +25,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     var attendeesText = ""
     var typeChanged = false
     var img: UIImage!
-    var uploaded:Int?
+    var uploaded = 2
     @IBOutlet var submitButton: UIButton!
     
     override func viewDidLoad() {
@@ -128,9 +128,9 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     }
     
     @IBAction func submit(sender: AnyObject) {
-        //submitButton.titleLabel?.text! = "Uploading..."
-        uploadAndGetResp()
-        handleResp()
+        submitButton.titleLabel?.text! = "Uploading..."
+        let uid = uploadAndGetResp()
+        handleResp(uid)
     }
     
     func choosePurposeLabel(){
@@ -160,16 +160,16 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     
     func parseJson(anyObj:AnyObject){
         if anyObj is NSDictionary {
-            uploaded = anyObj["OK"] as? Int!
+            uploaded = (anyObj["OK"] as? Int!)!
         }
     }
     
-    func uploadAndGetResp(){
+    func uploadAndGetResp() -> String{
         attendeesText = attendeesTF.text!
         notesText = notesTF.text!
         var filepath = ""
         let uuid = NSUUID().UUIDString
-        if let data = UIImageJPEGRepresentation(img, 1.0) {
+        if let data = UIImageJPEGRepresentation(img, 0.9) {
             filepath = getDocumentsDirectory().stringByAppendingPathComponent(uuid+".jpg")
             data.writeToFile(filepath, atomically: true)
         }
@@ -184,20 +184,21 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
                     let anyObj: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0))
                     self.parseJson(anyObj!)
                 } catch {
+                    self.uploaded = 3
                     print("Error: \(error)")
                 }
             }
         } catch let error {
+            uploaded = 4
             print("got an error creating the request: \(error)")
         }
-        while uploaded == nil{
-            sleep(1)
-        }
+        while uploaded == 2 {}
+        return uuid
     }
     
-    func handleResp(){
+    func handleResp(uuid: String){
         if uploaded == 1{
-            reset()
+            reset(uuid)
             let alert = UIAlertController(title: "Upload Success", message: "Successfuly Uploaded To Your Account", preferredStyle: UIAlertControllerStyle.Alert)
             let action = UIAlertAction(title: "Great", style: .Default, handler: nil)
             alert.addAction(action)
@@ -211,7 +212,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         }
     }
     
-    func reset() -> Void{
+    func reset(uid: String) -> Void{
         purpose = dataAsset[0]
         type = "Asset"
         notesText = ""
@@ -219,11 +220,21 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         typeChanged = false
         img = UIImage()
         imageView.image = img
-        uploaded = nil
+        uploaded = 2
         purposeButton.setTitle(purpose, forState: .Normal)
         typeButton.setTitle(type, forState: .Normal)
         notesTF.text = notesText
         attendeesTF.text = attendeesText
+        let filePath = getDocumentsDirectory().stringByAppendingString(uid+".jpg")
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(filePath) {
+            do {
+                try fileManager.removeItemAtPath(filePath)
+            }
+            catch let error as NSError {
+                print("Error: "+"\(error)")
+            }
+        }
     }
     
 }

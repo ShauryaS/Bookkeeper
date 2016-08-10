@@ -44,6 +44,17 @@ class SettingsView: UIViewController{
         acctNum = ""
         username = ""
         password = ""
+        rememberMe = false
+        let filePath = getDocumentsDirectory().stringByAppendingString("savedData.txt")
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(filePath) {
+            do {
+                try fileManager.removeItemAtPath(filePath)
+            }
+            catch let error as NSError {
+                print("Error: "+"\(error)")
+            }
+        }
         self.performSegueWithIdentifier("backToLogInSegue", sender: sender)
     }
     

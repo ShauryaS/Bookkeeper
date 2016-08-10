@@ -20,7 +20,7 @@ var auth = 3
 var acctNum = ""
 var username = ""
 var password = ""
-var remember = false
+var rememberMe = false
 
 struct User{
     var ok:Int?

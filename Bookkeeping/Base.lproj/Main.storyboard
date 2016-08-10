@@ -385,7 +385,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7OD-2V-wd8">
-                                <rect key="frame" x="20" y="474" width="560" height="30"/>
+                                <rect key="frame" x="20" y="474" width="560" height="26"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Log Out">
                                     <color key="titleColor" red="0.85436698717948723" green="0.0046206971398278585" blue="0.044129546774217057" alpha="1" colorSpace="calibratedRGB"/>
@@ -398,6 +398,7 @@
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="37A-JU-pTM" firstAttribute="top" secondItem="7OD-2V-wd8" secondAttribute="bottom" constant="100" id="DgL-tU-ZN6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7OD-2V-wd8" secondAttribute="trailing" id="eb4-wi-jv7"/>
                             <constraint firstItem="7OD-2V-wd8" firstAttribute="top" secondItem="Eo1-Qv-kAx" secondAttribute="bottom" constant="454" id="vRZ-Ct-Nr1"/>
                             <constraint firstItem="7OD-2V-wd8" firstAttribute="leading" secondItem="5sd-pg-QN9" secondAttribute="leadingMargin" id="zDd-2D-Ka5"/>
