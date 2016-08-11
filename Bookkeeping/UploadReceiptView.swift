@@ -129,6 +129,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     
     @IBAction func submit(sender: AnyObject) {
         submitButton.titleLabel?.text! = "Uploading..."
+        uploaded = 2
         let uid = uploadAndGetResp()
         handleResp(uid)
     }

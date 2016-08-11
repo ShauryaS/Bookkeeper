@@ -20,32 +20,35 @@ class LogInView: UIViewController{
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogInView.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        let filePath = getDocumentsDirectory().stringByAppendingString("savedData.txt")
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(filePath) {
-            var savedContents: String?
-            do {
-                savedContents = try NSString(contentsOfURL: NSURL(fileURLWithPath: filePath), encoding: NSUTF8StringEncoding) as String
-            }
-            catch {
-                print("Error: "+"\(error)")
-            }
-            let contents = savedContents?.characters.split(" ").map(String.init)
-            rememberMe = stringBool(contents![0])
-            if rememberMe{
-                username = contents![1]
-                password = contents![2]
-                acctNum = contents![3]
-                auth = 1
-            }
-            permitAuth()
-        }
     }
     
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let filePath = getDocumentsDirectory().stringByAppendingString("/savedData.txt")
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(filePath) {
+            var savedContents = ""
+            do {
+                savedContents = try NSString(contentsOfURL: NSURL(fileURLWithPath: filePath), encoding: NSUTF8StringEncoding) as String
+                let contents = savedContents.characters.split(" ").map(String.init)
+                rememberMe = stringBool(contents[0])
+                username = contents[1]
+                password = contents[2]
+                acctNum = contents[3]
+            }
+            catch {
+                print("Error: "+"\(error)")
+            }
+        }
+        if rememberMe{
+            self.performSegueWithIdentifier("LogToMainSegue", sender: nil)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -68,7 +71,7 @@ class LogInView: UIViewController{
         password = passwordTF.text!
         if username != "" && password != ""{
             connectToBackEnd(username, password: password)
-            saveAuth()
+            saveAuth(username, password: password)
             permitAuth()
         }
         else{
@@ -138,9 +141,9 @@ class LogInView: UIViewController{
         }
     }
     
-    func saveAuth(){
+    func saveAuth(username: String, password: String){
         if rememberMe {
-            let filePath = getDocumentsDirectory().stringByAppendingString("savedData.txt")
+            let filePath = getDocumentsDirectory().stringByAppendingString("/savedData.txt")
             let fileurl = NSURL(fileURLWithPath: filePath)
             let savedString = rememberMe.description+" "+username+" "+password+" "+acctNum
             do{

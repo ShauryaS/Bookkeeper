@@ -11,11 +11,14 @@ import UIKit
 
 class SettingsView: UIViewController{
     
+    @IBOutlet var usernameLab: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogInView.dismissKeyboard))
         view.addGestureRecognizer(tap)
         navigationItem.title="Settings"
+        usernameLab.text = "Username: "+username
     }
     
     //Calls this function when the tap is recognized.
@@ -45,7 +48,7 @@ class SettingsView: UIViewController{
         username = ""
         password = ""
         rememberMe = false
-        let filePath = getDocumentsDirectory().stringByAppendingString("savedData.txt")
+        let filePath = getDocumentsDirectory().stringByAppendingString("/savedData.txt")
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(filePath) {
             do {
