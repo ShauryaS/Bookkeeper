@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="40"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="0.66815732758620694" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="2ul-yK-apg"/>
+                                    <constraint firstAttribute="height" constant="40" id="DhG-fk-TlY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -30,17 +30,30 @@
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8g0-6W-Arx">
                                 <rect key="frame" x="20" y="230" width="560" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7rp-c2-Coj"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username or Email" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rdw-pk-9u7">
-                                <rect key="frame" x="20" y="180" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
-                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ze-C0-lIZ">
+                                <rect key="frame" x="25" y="268" width="555" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="PZn-Tr-M1W"/>
+                                </constraints>
+                                <state key="normal" title="Remember me">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="remember:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7cd-cD-Kff"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8d-1s-R9J">
                                 <rect key="frame" x="20" y="335" width="560" height="30"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Tes-3F-3rk"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="SIGN IN">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,34 +62,34 @@
                                     <action selector="signIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ns5-v5-FY9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ze-C0-lIZ">
-                                <rect key="frame" x="25" y="268" width="555" height="30"/>
-                                <state key="normal" title="Remember me">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="remember:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7cd-cD-Kff"/>
-                                </connections>
-                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username or Email" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rdw-pk-9u7">
+                                <rect key="frame" x="20" y="180" width="560" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Zir-1D-Rqv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.50196081400000003" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="8g0-6W-Arx" firstAttribute="leading" secondItem="j8d-1s-R9J" secondAttribute="leading" id="53c-Os-D6S"/>
-                            <constraint firstItem="NtJ-PX-Mbb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="968-oD-nEe"/>
-                            <constraint firstItem="8g0-6W-Arx" firstAttribute="trailing" secondItem="3Ze-C0-lIZ" secondAttribute="trailing" id="Jn0-ei-o2y"/>
-                            <constraint firstItem="NtJ-PX-Mbb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="KSk-6G-WmK"/>
-                            <constraint firstItem="8g0-6W-Arx" firstAttribute="top" secondItem="Rdw-pk-9u7" secondAttribute="bottom" constant="20" id="Mba-dR-h0f"/>
-                            <constraint firstAttribute="trailing" secondItem="NtJ-PX-Mbb" secondAttribute="trailing" id="Q11-ub-Ujr"/>
-                            <constraint firstItem="3Ze-C0-lIZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="X3O-kL-0bc"/>
-                            <constraint firstItem="j8d-1s-R9J" firstAttribute="top" secondItem="3Ze-C0-lIZ" secondAttribute="bottom" constant="37" id="YDQ-5P-AYF"/>
-                            <constraint firstItem="Rdw-pk-9u7" firstAttribute="trailing" secondItem="8g0-6W-Arx" secondAttribute="trailing" id="avK-jM-xIj"/>
-                            <constraint firstItem="Rdw-pk-9u7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cDP-n3-hu2"/>
-                            <constraint firstItem="NtJ-PX-Mbb" firstAttribute="centerX" secondItem="Rdw-pk-9u7" secondAttribute="centerX" id="hIv-3s-cEz"/>
-                            <constraint firstItem="3Ze-C0-lIZ" firstAttribute="top" secondItem="8g0-6W-Arx" secondAttribute="bottom" constant="8" symbolic="YES" id="mIZ-z8-Srt"/>
-                            <constraint firstItem="3Ze-C0-lIZ" firstAttribute="trailing" secondItem="j8d-1s-R9J" secondAttribute="trailing" id="snu-5Y-LP6"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="j8d-1s-R9J" secondAttribute="bottom" constant="235" id="yUh-5A-lM8"/>
-                            <constraint firstItem="Rdw-pk-9u7" firstAttribute="leading" secondItem="8g0-6W-Arx" secondAttribute="leading" id="yhu-FA-HZ9"/>
+                            <constraint firstItem="3Ze-C0-lIZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="6ti-QG-SX7"/>
+                            <constraint firstItem="8g0-6W-Arx" firstAttribute="top" secondItem="Rdw-pk-9u7" secondAttribute="bottom" constant="20" id="7NN-qT-3vW"/>
+                            <constraint firstItem="j8d-1s-R9J" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="C6u-Mn-CFw"/>
+                            <constraint firstItem="NtJ-PX-Mbb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="CbL-0Y-0nH"/>
+                            <constraint firstItem="j8d-1s-R9J" firstAttribute="top" secondItem="3Ze-C0-lIZ" secondAttribute="bottom" constant="37" id="ESP-sV-rlL"/>
+                            <constraint firstItem="8g0-6W-Arx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="FX0-W6-dGn"/>
+                            <constraint firstItem="j8d-1s-R9J" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="MIr-W4-hPP"/>
+                            <constraint firstItem="Rdw-pk-9u7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="N9I-f6-55p"/>
+                            <constraint firstItem="8g0-6W-Arx" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="a38-IV-IiC"/>
+                            <constraint firstItem="3Ze-C0-lIZ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="c1K-gN-0YQ"/>
+                            <constraint firstItem="3Ze-C0-lIZ" firstAttribute="top" secondItem="8g0-6W-Arx" secondAttribute="bottom" constant="8" id="gl6-2k-ZNc"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="j8d-1s-R9J" secondAttribute="bottom" priority="250" constant="235" id="iY0-KH-FQY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NtJ-PX-Mbb" secondAttribute="trailing" constant="-20" id="igf-c6-dgu"/>
+                            <constraint firstItem="Rdw-pk-9u7" firstAttribute="top" secondItem="NtJ-PX-Mbb" secondAttribute="bottom" constant="120" id="mh7-9s-ra0"/>
+                            <constraint firstItem="NtJ-PX-Mbb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="pHA-Ne-Ohf"/>
+                            <constraint firstItem="Rdw-pk-9u7" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="pw4-Bd-j8X"/>
                         </constraints>
                     </view>
                     <connections>
