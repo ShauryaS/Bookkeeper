@@ -16,7 +16,7 @@ class SelectTypeView: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     var purposeLabel = ""
     var notes = ""
     var attendees = ""
-    
+    var imgPath = ""
     var pickerDataSource = ["Asset", "Cost", "Expense", "Income", "Other", "Statement"]
     
     override func viewDidLoad() {
@@ -75,6 +75,9 @@ class SelectTypeView: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             }
             if attendees != ""{
                 yourNextViewController.attendeesText = attendees
+            }
+            if imgPath != ""{
+                yourNextViewController.imgPath = imgPath
             }
         }
     }

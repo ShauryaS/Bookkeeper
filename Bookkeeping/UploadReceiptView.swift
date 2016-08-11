@@ -26,6 +26,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     var typeChanged = false
     var img: UIImage!
     var uploaded = 2
+    var imgPath = ""
     @IBOutlet var submitButton: UIButton!
     
     override func viewDidLoad() {
@@ -50,6 +51,11 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         }
         if attendeesText != ""{
             attendeesTF.text = attendeesText
+        }
+        let fileManager = NSFileManager.defaultManager()
+        if imgPath != "" && fileManager.fileExistsAtPath(imgPath) {
+            img = UIImage(imageLiteral: imgPath)
+            imageView.image = img
         }
         accountIDLab.text = acctNum
         purposeButton.setTitle(purpose, forState: .Normal)
@@ -90,6 +96,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
         img = info[UIImagePickerControllerOriginalImage] as? UIImage
         imageView.image = img
+        saveImg()
     }
     
     @IBAction func selectType(sender: AnyObject) {
@@ -114,6 +121,9 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
             if attendeesText != ""{
                 yourNextViewController.attendees = attendeesText
             }
+            if imgPath != ""{
+                yourNextViewController.imgPath = imgPath
+            }
         }
         if "MainToPurposeSegue"==segue.identifier{
             let yourNextViewController = (segue.destinationViewController as! SelectPurposeView)
@@ -124,14 +134,17 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
             if attendeesText != ""{
                 yourNextViewController.attendees = attendeesText
             }
+            if imgPath != ""{
+                yourNextViewController.imgPath = imgPath
+            }
         }
     }
     
     @IBAction func submit(sender: AnyObject) {
         submitButton.titleLabel?.text! = "Uploading..."
         uploaded = 2
-        let uid = uploadAndGetResp()
-        handleResp(uid)
+        uploadAndGetResp()
+        handleResp()
     }
     
     func choosePurposeLabel(){
@@ -165,7 +178,24 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         }
     }
     
-    func uploadAndGetResp() -> String{
+    func saveImg(){
+        if imgPath == ""{
+            var filepath = ""
+            let uuid = NSUUID().UUIDString
+            if let data = UIImageJPEGRepresentation(img, 0.9) {
+                filepath = getDocumentsDirectory().stringByAppendingPathComponent(uuid+".jpg")
+                data.writeToFile(filepath, atomically: true)
+            }
+            imgPath = filepath
+        }
+        else{
+            if let data = UIImageJPEGRepresentation(img, 0.9) {
+                data.writeToFile(imgPath, atomically: true)
+            }
+        }
+    }
+    
+    func uploadAndGetResp(){
         attendeesText = attendeesTF.text!
         notesText = notesTF.text!
         var filepath = ""
@@ -174,6 +204,8 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
             filepath = getDocumentsDirectory().stringByAppendingPathComponent(uuid+".jpg")
             data.writeToFile(filepath, atomically: true)
         }
+        imgPath = filepath
+        print(imgPath)
         let fileurl = NSURL(fileURLWithPath: filepath)
         let params = ["file": Upload(fileUrl: fileurl)]
         do {
@@ -194,18 +226,18 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
             print("got an error creating the request: \(error)")
         }
         while uploaded == 2 {}
-        return uuid
     }
     
-    func handleResp(uuid: String){
+    func handleResp(){
         if uploaded == 1{
-            reset(uuid)
+            reset()
             let alert = UIAlertController(title: "Upload Success", message: "Successfuly Uploaded To Your Account", preferredStyle: UIAlertControllerStyle.Alert)
             let action = UIAlertAction(title: "Great", style: .Default, handler: nil)
             alert.addAction(action)
             self.presentViewController(alert, animated: true, completion: nil)
         }
         else{
+            reset()
             let alert = UIAlertController(title: "Upload Failed", message: "Please Try Again Later.", preferredStyle: UIAlertControllerStyle.Alert)
             let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
             alert.addAction(action)
@@ -213,7 +245,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         }
     }
     
-    func reset(uid: String) -> Void{
+    func reset(){
         purpose = dataAsset[0]
         type = "Asset"
         notesText = ""
@@ -226,11 +258,10 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         typeButton.setTitle(type, forState: .Normal)
         notesTF.text = notesText
         attendeesTF.text = attendeesText
-        let filePath = getDocumentsDirectory().stringByAppendingString(uid+".jpg")
         let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(filePath) {
+        if fileManager.fileExistsAtPath(imgPath) {
             do {
-                try fileManager.removeItemAtPath(filePath)
+                try fileManager.removeItemAtPath(imgPath)
             }
             catch let error as NSError {
                 print("Error: "+"\(error)")

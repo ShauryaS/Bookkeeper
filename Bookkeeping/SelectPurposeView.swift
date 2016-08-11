@@ -16,6 +16,7 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     var typeLabel = ""
     var notes = ""
     var attendees = ""
+    var imgPath = ""
     
     var pickerDataSource = ["Select Expense Purpose"]
     
@@ -92,6 +93,9 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
             }
             if attendees != ""{
                 yourNextViewController.attendeesText = attendees
+            }
+            if imgPath != ""{
+                yourNextViewController.imgPath = imgPath
             }
         }
     }
