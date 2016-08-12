@@ -3,7 +3,7 @@
 //  Bookkeeping
 //
 //  Created by Shaurya Srivastava on 7/12/16.
-//  Copyright © 2016 CFO-online. All rights reserved.
+//  Copyright © 2016 CFO-online, Inc. All rights reserved.
 //
 
 import Foundation
@@ -12,23 +12,63 @@ import SwiftHTTP
 
 class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    //variable for the label that displays the account id
     @IBOutlet var accountIDLab: UILabel!
+    
+    //variable for the textfield where the names of attendees to be entered
     @IBOutlet var attendeesTF: UITextField!
+    
+    //variable for the textfield where notes to be entered
     @IBOutlet var notesTF: UITextField!
+    
+    //variable for the image view where the image taken will be displayed
     @IBOutlet var imageView: UIImageView!
+    
+    //variable that is used to pick the image that has been taken
     var imagePicker: UIImagePickerController!
+    
+    //variable for the button that navigates to view where the purpose can be selected
     @IBOutlet var purposeButton: UIButton!
+    
+    //variable for the button that navigates to view where the type can be selected
     @IBOutlet var typeButton: UIButton!
+    
+    //variable to set the default purpose button label
     var purpose = dataAsset[0]
+    
+    //variable to set the default type button label
     var type = "Asset"
+    
+    //variable to set the default note textfield data
     var notesText = ""
+    
+    //variable to set the default attendees textfield data
     var attendeesText = ""
+    
+    //variable that moniters if the type has been changed
     var typeChanged = false
+    
+    //variable to store the image of the picture taken
     var img: UIImage!
+    
+    //variable that monitors the upload state 
+    //diff numbers refer to whether upload succeeded or failed
     var uploaded = 2
+    
+    //variable that stores the path of the image file that has been saved on the device
     var imgPath = ""
+    
+    //variable for the button that is pressed for the uploading to begin
     @IBOutlet var submitButton: UIButton!
     
+    //called when the view is loaded
+    //Params: none
+    //sets the tint color of the navigation bar at the top
+    //sets the title text in the navigation bar
+    //sets the tap anywhere to get rid of keyboard function
+    //sets the text of the labels, buttons, and text fields
+    //sets the image of the image view if there is an image saved at the image path
+    //Return: none
     override func viewDidLoad() {
         super.viewDidLoad()
         let nav = self.navigationController?.navigationBar
@@ -68,6 +108,12 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         view.endEditing(true)
     }
     
+    //function that is called when view is going to appear
+    //Param: boolean variable to determine if view should be animated
+    //sets the navigation bar to be visible
+    //sets the tint of the notification bar to white (light content)
+    //sets the color of the notification bar to black
+    //Return: none
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden =  false
         UIApplication.sharedApplication().statusBarHidden = false
@@ -80,11 +126,17 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         nav?.tintColor = UIColor.blackColor()
     }
     
+    //default view method
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    
+    //param: AnyObject that is recieved by button
+    //param not used but necessary as button always sends an AnyObject
+    //opens view to take an image
+    //Return: none
     @IBAction func takePhoto(sender: AnyObject) {
         imagePicker =  UIImagePickerController()
         imagePicker.delegate = self
@@ -92,6 +144,11 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
+    //param: UIImagePickerController - used to pick image. Info of the image as a String/AnyObject array - used to get image
+    //sets the imageView image
+    //sets the global img variable
+    //saves image in a file
+    //Return: none
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         imagePicker.dismissViewControllerAnimated(true, completion: nil)
         img = info[UIImagePickerControllerOriginalImage] as? UIImage
@@ -99,18 +156,33 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         saveImg()
     }
     
+    //param: AnyObject that is recieved by button
+    //param not used but necessary as button always sends an AnyObject
+    //gets the text from the notes and attendees textfield and saves them to according global vars
+    //changes view to the type selection view
+    //Return: none
     @IBAction func selectType(sender: AnyObject) {
         attendeesText = attendeesTF.text!
         notesText = notesTF.text!
         self.performSegueWithIdentifier("MainToTypeSegue", sender: sender)
     }
     
+    //param: AnyObject that is recieved by button
+    //param not used but necessary as button always sends an AnyObject
+    //gets the text from the notes and attendees textfield and saves them to according global vars
+    //changes view to the purpose selection view
+    //Return: none
     @IBAction func selectPurpose(sender: AnyObject) {
         attendeesText = attendeesTF.text!
         notesText = notesTF.text!
         self.performSegueWithIdentifier("MainToPurposeSegue", sender: sender)
     }
     
+    //params: UIStoryboardSegue - to monitor the segue used - and AnyObject
+    //func used to send data through the segue
+    //sends purpose text, notes text, and img path if going to select type view
+    //sends type text, notes text, and img path if going to select purpose view
+    //Return: none
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if "MainToTypeSegue"==segue.identifier{
             let yourNextViewController = (segue.destinationViewController as! SelectTypeView)
@@ -140,13 +212,17 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         }
     }
     
+    //param: AnyObject that is recieved by button
+    //param not used but necessary as button always sends an AnyObject
     @IBAction func submit(sender: AnyObject) {
-        submitButton.titleLabel?.text! = "Uploading..."
         uploaded = 2
         uploadAndGetResp()
         handleResp()
     }
     
+    //params: none
+    //function to select the default label for the purpose button depending on the label text of the type button
+    //Return: none
     func choosePurposeLabel(){
         switch(type){
             case "Asset":
@@ -172,12 +248,21 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         }
     }
     
+    //param: json data as AnyObject
+    //parses the data recieved when the image is uploaded so that action dialog boxes can occur accordingly
+    //used to know whether upload was successful or failed
+    //Return: none
     func parseJson(anyObj:AnyObject){
         if anyObj is NSDictionary {
             uploaded = (anyObj["OK"] as? Int!)!
         }
     }
     
+    //params: none
+    //saves image to a file with a random name
+    //image saved as jpg
+    //saves to an existing image file or new image file depending on whether imgPath is nil or not
+    //Return: none
     func saveImg(){
         if imgPath == ""{
             var filepath = ""
@@ -195,18 +280,16 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         }
     }
     
+    //params: none
+    //gets text from attendees and notes textfield
+    //converts imgPath to NSUrl
+    //attempts to upload the image to the website and catches all errors
+    //different states of uploaded var are assigned depending on upload status
+    //Return: none
     func uploadAndGetResp(){
         attendeesText = attendeesTF.text!
         notesText = notesTF.text!
-        var filepath = ""
-        let uuid = NSUUID().UUIDString
-        if let data = UIImageJPEGRepresentation(img, 0.9) {
-            filepath = getDocumentsDirectory().stringByAppendingPathComponent(uuid+".jpg")
-            data.writeToFile(filepath, atomically: true)
-        }
-        imgPath = filepath
-        print(imgPath)
-        let fileurl = NSURL(fileURLWithPath: filepath)
+        let fileurl = NSURL(fileURLWithPath: imgPath)
         let params = ["file": Upload(fileUrl: fileurl)]
         do {
             let opt = try HTTP.POST(url+"/upload?v=2&u="+username+"&p="+password+"&a="+acctNum+"&purpose="+purpose+"&type="+type+"&attendees="+attendeesText+"&notes="+notesText, parameters: params)
@@ -228,6 +311,10 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         while uploaded == 2 {}
     }
     
+    //params: none
+    //based on uploaded val (upload status) different alert boxes are shown to inform user of the status
+    //reset method is called in both cases to reset all the data in the view
+    //Return: none
     func handleResp(){
         if uploaded == 1{
             reset()
@@ -245,6 +332,12 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         }
     }
     
+    //params: none
+    //func to reset all the data in the entire view
+    //resets all variables, labels, textfields, button labels
+    //removes image from image view
+    //deletes image file
+    //Return: none
     func reset(){
         purpose = dataAsset[0]
         type = "Asset"

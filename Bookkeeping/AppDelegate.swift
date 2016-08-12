@@ -3,7 +3,7 @@
 //  Bookkeeping
 //
 //  Created by Shaurya Srivastava on 7/12/16.
-//  Copyright © 2016 CFO-online. All rights reserved.
+//  Copyright © 2016 CFO-online, Inc. All rights reserved.
 //
 
 import UIKit
