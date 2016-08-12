@@ -88,7 +88,7 @@ class LogInView: UIViewController{
         }
         else{
             auth = 3
-            let alert = UIAlertController(title: "Login Failed", message: "Email and Password Don't Match. Re-enter Credentials.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Login Failed", message: "Email and Password Don't Match.", preferredStyle: UIAlertControllerStyle.Alert)
             let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
             alert.addAction(action)
             self.presentViewController(alert, animated: true, completion: nil)
