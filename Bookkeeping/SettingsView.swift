@@ -61,6 +61,7 @@ class SettingsView: UIViewController{
     //func to logout from account
     //resets all global credential data (username, password, acctNum, rememberMe)
     //resets auth val back to default
+    //resets all the data arrays
     //deletes savedData file
     //switches view back to login view
     @IBAction func logout(sender: AnyObject) {
@@ -69,6 +70,9 @@ class SettingsView: UIViewController{
         username = ""
         password = ""
         rememberMe = false
+        dataAll = [String: AnyObject]()
+        dataTypes = [String]()
+        dataPurposes = [String]()
         let filePath = getDocumentsDirectory().stringByAppendingString("/savedData.txt")
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(filePath) {

@@ -13,10 +13,13 @@ import Foundation
 //variable containing the url to the website where data is posted, uploaded, and recieved
 let url = "https://cfo-online.com"
 
+//array to store the type array from the json
 var dataAll = [String: AnyObject]()
 
+//array to store all the type options
 var dataTypes = [String]()
 
+//array to store all the purposes options
 var dataPurposes = [String]()
 
 //variable of the auth status

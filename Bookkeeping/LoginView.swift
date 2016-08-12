@@ -157,7 +157,8 @@ class LogInView: UIViewController{
     
     //param: json data as AnyObject
     //parses the data recieved when the username and password are posted
-    //gets auth status and acct number and all the types and purposes
+    //gets auth status and acct number and all the types and purposes options
+    //sets the data array for types and sorts it lexographically
     //Return: none
     func parseJson(anyObj:AnyObject){
         var user = User()

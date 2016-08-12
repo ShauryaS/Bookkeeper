@@ -61,12 +61,16 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //variable for the button that is pressed for the uploading to begin
     @IBOutlet var submitButton: UIButton!
     
+    //variable to hold the error message to be printed
+    var errmsg = ""
+    
     //called when the view is loaded
     //Params: none
     //sets the tint color of the navigation bar at the top
     //sets the title text in the navigation bar
     //sets the tap anywhere to get rid of keyboard function
     //sets the text of the labels, buttons, and text fields
+    //sets the purpose options based on the type selected
     //sets the image of the image view if there is an image saved at the image path
     //Return: none
     override func viewDidLoad() {
@@ -144,6 +148,9 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
+    //params: none
+    //sets the data array for purposes and sorts it lexographically
+    //Return: none
     func setDataPurposes(){
         let temp = dataAll[type]?.allKeys
         dataPurposes = temp as! [String]
@@ -229,20 +236,36 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     }
     
     //params: none
-    //function to select the default label for the purpose button depending on the label text of the type button
+    //function to select the default label for the purpose button which val of purpose is 2
     //Return: none
     func choosePurposeLabel(){
-        purpose = dataPurposes[0]
+        purpose = parse(dataAll[type]!)
     }
     
     //param: json data as AnyObject
-    //parses the data recieved when the image is uploaded so that action dialog boxes can occur accordingly
+    //parses the data recieved when the image is uploaded so that action dialog boxes can occur 
     //used to know whether upload was successful or failed
     //Return: none
     func parseJson(anyObj:AnyObject){
         if anyObj is NSDictionary {
             uploaded = (anyObj["OK"] as? Int!)!
         }
+    }
+    
+    //params: array data as AnyObject
+    //parses the data in the array to find the purpose with a val of 2
+    //Return: String
+    func parse(anyObj:AnyObject) -> String{
+        var toRet = ""
+        if anyObj is NSDictionary {
+            for key in dataPurposes{
+                let val = anyObj[key] as? String
+                if val! == "2"{
+                    toRet = key
+                }
+            }
+        }
+        return toRet
     }
     
     //params: none
@@ -289,11 +312,13 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
                 } catch {
                     self.uploaded = 3
                     print("Error: \(error)")
+                    self.errmsg = "\(error)"
                 }
             }
         } catch let error {
             uploaded = 4
             print("got an error creating the request: \(error)")
+            self.errmsg = "\(error)"
         }
         while uploaded == 2 {}
     }
@@ -311,8 +336,9 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
             self.presentViewController(alert, animated: true, completion: nil)
         }
         else{
+            let tempmsg = errmsg
             reset()
-            let alert = UIAlertController(title: "Upload Failed", message: "Please Try Again Later.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Upload Failed", message: tempmsg, preferredStyle: UIAlertControllerStyle.Alert)
             let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
             alert.addAction(action)
             self.presentViewController(alert, animated: true, completion: nil)
@@ -326,6 +352,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //deletes image file
     //Return: none
     func reset(){
+        errmsg = ""
         purpose = dataPurposes[0]
         type = "Asset"
         notesText = ""
