@@ -13,23 +13,11 @@ import Foundation
 //variable containing the url to the website where data is posted, uploaded, and recieved
 let url = "https://cfo-online.com"
 
-//array containing String names of the purpose options if the type is asset
-let dataAsset = ["Building", "Computer Equipment", "Furniture & Fixtures", "Land", "Leasehold Improvement", "Office Equipment", "Other", "Plant & Machinery", "Vehicles"]
+var dataAll = [String: AnyObject]()
 
-//array containing Strings names of the purpose options if the type is cost
-let dataCost = ["Labor Costs", "Other", "Product Costs", "Raw Materials"]
+var dataTypes = [String]()
 
-//array containing Strings names of the purpose options if the type is expense
-let dataExpense = ["Advertising", "Car & Truck", "Commissions & Fees", "Contract Labor", "Depletion", "Depreciation", "Employee Benefits", "Insurance", "Interest", "Meals & Entertainment", "Office Expense", "Other", "Pension & Profit Sharing", "Professional Services", "Rent & Lease", "Repairs & Maintenance", "Supplies", "Taxes & Liscenses", "Travel & Entertainment", "Utilities", "Wages"]
-
-//array containing Strings names of the purpose options if the type is income
-let dataIncome = ["Non-Operating Income", "Operating Income", "Other"]
-
-//array containing Strings names of the purpose options if the type is other
-let dataOther = ["Other"]
-
-//array containing Strings names of the purpose options if the type is statement
-let dataStatement = ["Bank Statement", "Credit Card Statement", "Other"]
+var dataPurposes = [String]()
 
 //variable of the auth status
 var auth = 3
@@ -50,6 +38,7 @@ var rememberMe = false
 struct User{
     var ok:Int?
     var accts:String?
+    var types: [String: AnyObject]?
     init(){}
 }
 

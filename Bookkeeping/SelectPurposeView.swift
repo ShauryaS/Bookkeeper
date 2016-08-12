@@ -30,7 +30,7 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     var imgPath = ""
     
     //array for the data to be loaded into the UIPickerView
-    var pickerDataSource = ["Select Expense Purpose"]
+    var pickerDataSource = [""]
     
     //called when the view is loaded
     //Params: none
@@ -39,24 +39,7 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title="Select Expense Purpose"
-        if typeLabel == "Asset"{
-            pickerDataSource = dataAsset
-        }
-        else if typeLabel == "Cost"{
-            pickerDataSource = dataCost
-        }
-        else if typeLabel == "Expense"{
-            pickerDataSource = dataExpense
-        }
-        else if typeLabel == "Income"{
-            pickerDataSource = dataIncome
-        }
-        else if typeLabel == "Other"{
-            pickerDataSource = dataOther
-        }
-        else if typeLabel == "Statement"{
-            pickerDataSource = dataStatement
-        }
+        pickerDataSource = dataPurposes
         pickerView.dataSource = self;
         pickerView.delegate = self;
     }

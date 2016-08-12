@@ -157,16 +157,26 @@ class LogInView: UIViewController{
     
     //param: json data as AnyObject
     //parses the data recieved when the username and password are posted
-    //gets auth status and acct number
+    //gets auth status and acct number and all the types and purposes
     //Return: none
     func parseJson(anyObj:AnyObject){
         var user = User()
         if anyObj is NSDictionary {
             user.ok = anyObj["OK"] as? Int
             user.accts = anyObj["accts"] as? String
+            user.types = anyObj["types"] as? [String: AnyObject]
             auth = user.ok!
             if user.accts != nil{
                 acctNum = user.accts!
+            }
+            if user.types != nil{
+                dataAll = user.types!
+                for key in (user.types?.keys)!{
+                    dataTypes.append(key)
+                }
+                dataTypes = dataTypes.sort{
+                    return $0 < $1
+                }
             }
         }
     }

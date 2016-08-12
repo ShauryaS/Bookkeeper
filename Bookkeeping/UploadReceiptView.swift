@@ -34,10 +34,10 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     @IBOutlet var typeButton: UIButton!
     
     //variable to set the default purpose button label
-    var purpose = dataAsset[0]
+    var purpose = ""
     
     //variable to set the default type button label
-    var type = "Asset"
+    var type = ""
     
     //variable to set the default note textfield data
     var notesText = ""
@@ -77,8 +77,9 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         view.addGestureRecognizer(tap)
         navigationItem.title="Bookkeeping"
         if type == ""{
-            type = "Asset"
+            type = dataTypes[0]
         }
+        setDataPurposes()
         if typeChanged{
             choosePurposeLabel()
             typeChanged = !typeChanged
@@ -131,7 +132,6 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
     //param: AnyObject that is recieved by button
     //param not used but necessary as button always sends an AnyObject
@@ -142,6 +142,14 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         imagePicker.delegate = self
         imagePicker.sourceType = .Camera
         presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    func setDataPurposes(){
+        let temp = dataAll[type]?.allKeys
+        dataPurposes = temp as! [String]
+        dataPurposes = dataPurposes.sort{
+            return $0 < $1
+        }
     }
     
     //param: UIImagePickerController - used to pick image. Info of the image as a String/AnyObject array - used to get image
@@ -224,28 +232,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //function to select the default label for the purpose button depending on the label text of the type button
     //Return: none
     func choosePurposeLabel(){
-        switch(type){
-            case "Asset":
-                purpose = dataAsset[0]
-                break
-            case "Cost":
-                purpose = dataCost[0]
-                break
-            case "Expense":
-                purpose = dataExpense[0]
-                break
-            case "Income":
-                purpose = dataIncome[0]
-                break
-            case "Other":
-                purpose = dataOther[0]
-                break
-            case "Statement":
-                purpose = dataStatement[0]
-                break
-            default:
-                break
-        }
+        purpose = dataPurposes[0]
     }
     
     //param: json data as AnyObject
@@ -339,7 +326,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //deletes image file
     //Return: none
     func reset(){
-        purpose = dataAsset[0]
+        purpose = dataPurposes[0]
         type = "Asset"
         notesText = ""
         attendeesText = ""

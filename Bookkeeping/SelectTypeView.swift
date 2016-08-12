@@ -30,7 +30,7 @@ class SelectTypeView: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     var imgPath = ""
     
     //array for the data to be loaded into the UIPickerView
-    var pickerDataSource = ["Asset", "Cost", "Expense", "Income", "Other", "Statement"]
+    var pickerDataSource = dataTypes
     
     //called when the view is loaded
     //Params: none
