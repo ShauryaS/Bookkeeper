@@ -2,8 +2,8 @@
 //  UploadReceiptView.swift
 //  Bookkeeping
 //
-//  Created by Shaurya Srivastava on 7/13/16.
-//  Copyright © 2016 Shaurya Srivastava. All rights reserved.
+//  Created by Shaurya Srivastava on 7/12/16.
+//  Copyright © 2016 CFO-online. All rights reserved.
 //
 
 import Foundation
