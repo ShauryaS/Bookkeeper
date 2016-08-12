@@ -52,17 +52,14 @@ class LogInView: UIViewController{
             do {
                 savedContents = try NSString(contentsOfURL: NSURL(fileURLWithPath: filePath), encoding: NSUTF8StringEncoding) as String
                 let contents = savedContents.characters.split(" ").map(String.init)
-                rememberMe = stringBool(contents[0])
-                username = contents[1]
-                password = contents[2]
-                acctNum = contents[3]
+                username = contents[0]
+                password = contents[1]
             }
             catch {
                 print("Error: "+"\(error)")
             }
-        }
-        if rememberMe{
-            self.performSegueWithIdentifier("LogToMainSegue", sender: nil)
+            connectToBackEnd(username, password: password)
+            permitAuth()
         }
     }
     
@@ -192,14 +189,13 @@ class LogInView: UIViewController{
     }
     
     //params: username and password - to be saved in file
-    //func saves credential data in a file if rememberMe bool val is true
     //credential data is saved as string in a file
     //Return: none
     func saveAuth(username: String, password: String){
         if rememberMe {
             let filePath = getDocumentsDirectory().stringByAppendingString("/savedData.txt")
             let fileurl = NSURL(fileURLWithPath: filePath)
-            let savedString = rememberMe.description+" "+username+" "+password+" "+acctNum
+            let savedString = username+" "+password
             do{
                 try savedString.writeToURL(fileurl, atomically: false, encoding: NSUTF8StringEncoding)
             }
