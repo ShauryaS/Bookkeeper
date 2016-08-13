@@ -21,6 +21,9 @@ class LogInView: UIViewController{
     //variable for the button which indactes whether credentials should be saved
     @IBOutlet var rememberMeButton: UIButton!
     
+    //variable for error msg
+    var emsg = "error"
+    
     //called when the view is loaded
     //Params: none
     //sets the tap anywhere to get rid of keyboard function
@@ -118,7 +121,9 @@ class LogInView: UIViewController{
         }
         else{
             auth = 3
-            let alert = UIAlertController(title: "Login Failed", message: "Credentials Don't Match.", preferredStyle: UIAlertControllerStyle.Alert)
+            let tempmsg = emsg
+            emsg = ""
+            let alert = UIAlertController(title: "Login Failed", message: tempmsg, preferredStyle: UIAlertControllerStyle.Alert)
             let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
             alert.addAction(action)
             self.presentViewController(alert, animated: true, completion: nil)
@@ -152,7 +157,7 @@ class LogInView: UIViewController{
         } catch let error {
             print("got an error creating the request: \(error)")
         }
-        while auth == 3 {}
+        while auth == 3 || emsg == "error" {}
     }
     
     //param: json data as AnyObject
@@ -163,9 +168,10 @@ class LogInView: UIViewController{
     func parseJson(anyObj:AnyObject){
         var user = User()
         if anyObj is NSDictionary {
-            user.ok = anyObj["OK"] as? Int
             user.accts = anyObj["accts"] as? String
             user.types = anyObj["types"] as? [String: AnyObject]
+            user.emsg = anyObj["errmsg"] as? String
+            user.ok = anyObj["OK"] as? Int
             auth = user.ok!
             if user.accts != nil{
                 acctNum = user.accts!
@@ -178,6 +184,9 @@ class LogInView: UIViewController{
                 dataTypes = dataTypes.sort{
                     return $0 < $1
                 }
+            }
+            if user.emsg != nil{
+                emsg = user.emsg!
             }
         }
     }

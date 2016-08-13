@@ -58,11 +58,11 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //variable that stores the path of the image file that has been saved on the device
     var imgPath = ""
     
+    //variable that stores the error message
+    var errmsg = ""
+    
     //variable for the button that is pressed for the uploading to begin
     @IBOutlet var submitButton: UIButton!
-    
-    //variable to hold the error message to be printed
-    var errmsg = ""
     
     //called when the view is loaded
     //Params: none
@@ -290,6 +290,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         }
     }
     
+    
     //params: none
     //gets text from attendees and notes textfield
     //converts imgPath to NSUrl
@@ -302,7 +303,13 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         let fileurl = NSURL(fileURLWithPath: imgPath)
         let params = ["file": Upload(fileUrl: fileurl)]
         do {
-            let opt = try HTTP.POST(url+"/upload?v=2&u="+username+"&p="+password+"&a="+acctNum+"&purpose="+purpose+"&type="+type+"&attendees="+attendeesText+"&notes="+notesText, parameters: params)
+            var decodedUrl = "&u=\(username)&p=\(password)"
+            decodedUrl = decodedUrl+"&a=\(acctNum)&purpose=\(purpose)&type=\(type)"
+            decodedUrl = decodedUrl+"&attendees=\(attendeesText)&notes=\(notesText)"
+            var encodedUrl = decodedUrl.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+            encodedUrl = encodedUrl?.stringByReplacingOccurrencesOfString("%20&%20", withString: "%20%26%20")
+            print(url+encodedUrl!)
+            let opt = try HTTP.POST(url+encodedUrl!, parameters: params)
             opt.start { response in
                 let jsonString = String(data: response.data, encoding: NSUTF8StringEncoding)
                 let data: NSData = (jsonString!.dataUsingEncoding(NSUTF8StringEncoding))!
@@ -318,7 +325,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         } catch let error {
             uploaded = 4
             print("got an error creating the request: \(error)")
-            self.errmsg = "\(error)"
+            errmsg = "\(error)"
         }
         while uploaded == 2 {}
     }
@@ -353,8 +360,6 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //Return: none
     func reset(){
         errmsg = ""
-        purpose = dataPurposes[0]
-        type = "Asset"
         notesText = ""
         attendeesText = ""
         typeChanged = false

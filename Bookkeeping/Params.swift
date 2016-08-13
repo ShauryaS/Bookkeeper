@@ -11,7 +11,7 @@
 import Foundation
 
 //variable containing the url to the website where data is posted, uploaded, and recieved
-let url = "https://cfo-online.com"
+let url = "https://cfo-online.com/upload?v=2"
 
 //array to store the type array from the json
 var dataAll = [String: AnyObject]()
@@ -42,8 +42,11 @@ struct User{
     var ok:Int?
     var accts:String?
     var types: [String: AnyObject]?
+    var emsg:String?
     init(){}
 }
+
+
 
 //params: none
 //func used to get path to the apps document directory
