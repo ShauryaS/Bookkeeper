@@ -148,7 +148,6 @@ class LogInView: UIViewController{
                 let data: Data = (jsonString!.data(using: String.Encoding.utf8))!
                 do{
                     let anyObj: Any? = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0))
-                    print(anyObj!)
                     self.parseJson(anyObj! as AnyObject)
                 } catch {
                     print("Error: \(error)")
@@ -172,7 +171,6 @@ class LogInView: UIViewController{
             user.types = anyObj["types"] as? [String: AnyObject]
             user.emsg = anyObj["errmsg"] as? String
             user.ok = anyObj["OK"] as? AnyObject
-            print(user.ok?.description)
             auth = Int((user.ok?.description)!)!
             if user.accts != nil{
                 acctNum = user.accts!
