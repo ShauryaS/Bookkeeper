@@ -76,7 +76,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     override func viewDidLoad() {
         super.viewDidLoad()
         let nav = self.navigationController?.navigationBar
-        nav?.tintColor = UIColor.blackColor()
+        nav?.tintColor = UIColor.black
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogInView.dismissKeyboard))
         view.addGestureRecognizer(tap)
         navigationItem.title="Bookkeeping"
@@ -97,14 +97,14 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         if attendeesText != ""{
             attendeesTF.text = attendeesText
         }
-        let fileManager = NSFileManager.defaultManager()
-        if imgPath != "" && fileManager.fileExistsAtPath(imgPath) {
-            img = UIImage(imageLiteral: imgPath)
+        let fileManager = FileManager.default
+        if imgPath != "" && fileManager.fileExists(atPath: imgPath) {
+            img = UIImage(named: imgPath)
             imageView.image = img
         }
         accountIDLab.text = acctNum
-        purposeButton.setTitle(purpose, forState: .Normal)
-        typeButton.setTitle(type, forState: .Normal)
+        purposeButton.setTitle(purpose, for: UIControlState())
+        typeButton.setTitle(type, for: UIControlState())
     }
     
     //Calls this function when the tap is recognized.
@@ -119,16 +119,16 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //sets the tint of the notification bar to white (light content)
     //sets the color of the notification bar to black
     //Return: none
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden =  false
-        UIApplication.sharedApplication().statusBarHidden = false
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-        let statusBar: UIView = UIApplication.sharedApplication().valueForKey("statusBar") as! UIView
-        if statusBar.respondsToSelector(Selector("setBackgroundColor:")) {
-            statusBar.backgroundColor = UIColor.blackColor()
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden =  false
+        UIApplication.shared.isStatusBarHidden = false
+        UIApplication.shared.statusBarStyle = .lightContent
+        let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+        if statusBar.responds(to: #selector(setter: UIView.backgroundColor)) {
+            statusBar.backgroundColor = UIColor.black
         }
         let nav = self.navigationController?.navigationBar
-        nav?.tintColor = UIColor.blackColor()
+        nav?.tintColor = UIColor.black
     }
     
     //default view method
@@ -141,11 +141,11 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //param not used but necessary as button always sends an AnyObject
     //opens view to take an image
     //Return: none
-    @IBAction func takePhoto(sender: AnyObject) {
+    @IBAction func takePhoto(_ sender: AnyObject) {
         imagePicker =  UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .Camera
-        presentViewController(imagePicker, animated: true, completion: nil)
+        imagePicker.sourceType = .camera
+        present(imagePicker, animated: true, completion: nil)
     }
     
     //params: none
@@ -154,7 +154,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     func setDataPurposes(){
         let temp = dataAll[type]?.allKeys
         dataPurposes = temp as! [String]
-        dataPurposes = dataPurposes.sort{
+        dataPurposes = dataPurposes.sorted{
             return $0 < $1
         }
     }
@@ -164,8 +164,8 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //sets the global img variable
     //saves image in a file
     //Return: none
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        imagePicker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        imagePicker.dismiss(animated: true, completion: nil)
         img = info[UIImagePickerControllerOriginalImage] as? UIImage
         imageView.image = img
         saveImg()
@@ -176,10 +176,10 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //gets the text from the notes and attendees textfield and saves them to according global vars
     //changes view to the type selection view
     //Return: none
-    @IBAction func selectType(sender: AnyObject) {
+    @IBAction func selectType(_ sender: AnyObject) {
         attendeesText = attendeesTF.text!
         notesText = notesTF.text!
-        self.performSegueWithIdentifier("MainToTypeSegue", sender: sender)
+        self.performSegue(withIdentifier: "MainToTypeSegue", sender: sender)
     }
     
     //param: AnyObject that is recieved by button
@@ -187,10 +187,10 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //gets the text from the notes and attendees textfield and saves them to according global vars
     //changes view to the purpose selection view
     //Return: none
-    @IBAction func selectPurpose(sender: AnyObject) {
+    @IBAction func selectPurpose(_ sender: AnyObject) {
         attendeesText = attendeesTF.text!
         notesText = notesTF.text!
-        self.performSegueWithIdentifier("MainToPurposeSegue", sender: sender)
+        self.performSegue(withIdentifier: "MainToPurposeSegue", sender: sender)
     }
     
     //params: UIStoryboardSegue - to monitor the segue used - and AnyObject
@@ -198,9 +198,9 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //sends purpose text, notes text, and img path if going to select type view
     //sends type text, notes text, and img path if going to select purpose view
     //Return: none
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if "MainToTypeSegue"==segue.identifier{
-            let yourNextViewController = (segue.destinationViewController as! SelectTypeView)
+            let yourNextViewController = (segue.destination as! SelectTypeView)
             yourNextViewController.purposeLabel = purpose
             if notesText != ""{
                 yourNextViewController.notes = notesText
@@ -213,7 +213,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
             }
         }
         if "MainToPurposeSegue"==segue.identifier{
-            let yourNextViewController = (segue.destinationViewController as! SelectPurposeView)
+            let yourNextViewController = (segue.destination as! SelectPurposeView)
             yourNextViewController.typeLabel = type
             if notesText != ""{
                 yourNextViewController.notes = notesText
@@ -229,7 +229,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     
     //param: AnyObject that is recieved by button
     //param not used but necessary as button always sends an AnyObject
-    @IBAction func submit(sender: AnyObject) {
+    @IBAction func submit(_ sender: AnyObject) {
         uploaded = 2
         uploadAndGetResp()
         handleResp()
@@ -246,7 +246,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //parses the data recieved when the image is uploaded so that action dialog boxes can occur 
     //used to know whether upload was successful or failed
     //Return: none
-    func parseJson(anyObj:AnyObject){
+    func parseJson(_ anyObj:AnyObject){
         if anyObj is NSDictionary {
             uploaded = (anyObj["OK"] as? Int!)!
         }
@@ -255,7 +255,7 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     //params: array data as AnyObject
     //parses the data in the array to find the purpose with a val of 2
     //Return: String
-    func parse(anyObj:AnyObject) -> String{
+    func parse(_ anyObj:AnyObject) -> String{
         var toRet = ""
         if anyObj is NSDictionary {
             for key in dataPurposes{
@@ -276,16 +276,16 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     func saveImg(){
         if imgPath == ""{
             var filepath = ""
-            let uuid = NSUUID().UUIDString
+            let uuid = UUID().uuidString
             if let data = UIImageJPEGRepresentation(img, 0.9) {
-                filepath = getDocumentsDirectory().stringByAppendingPathComponent(uuid+".jpg")
-                data.writeToFile(filepath, atomically: true)
+                filepath = getDocumentsDirectory().appendingPathComponent(uuid+".jpg")
+                try? data.write(to: URL(fileURLWithPath: filepath), options: [.atomic])
             }
             imgPath = filepath
         }
         else{
             if let data = UIImageJPEGRepresentation(img, 0.9) {
-                data.writeToFile(imgPath, atomically: true)
+                try? data.write(to: URL(fileURLWithPath: imgPath), options: [.atomic])
             }
         }
     }
@@ -300,22 +300,22 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     func uploadAndGetResp(){
         attendeesText = attendeesTF.text!
         notesText = notesTF.text!
-        let fileurl = NSURL(fileURLWithPath: imgPath)
+        let fileurl = URL(fileURLWithPath: imgPath)
         let params = ["file": Upload(fileUrl: fileurl)]
         do {
             var decodedUrl = "&u=\(username)&p=\(password)"
             decodedUrl = decodedUrl+"&a=\(acctNum)&purpose=\(purpose)&type=\(type)"
             decodedUrl = decodedUrl+"&attendees=\(attendeesText)&notes=\(notesText)"
-            var encodedUrl = decodedUrl.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-            encodedUrl = encodedUrl?.stringByReplacingOccurrencesOfString("%20&%20", withString: "%20%26%20")
+            var encodedUrl = decodedUrl.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+            encodedUrl = encodedUrl?.replacingOccurrences(of: "%20&%20", with: "%20%26%20")
             print(url+encodedUrl!)
             let opt = try HTTP.POST(url+encodedUrl!, parameters: params)
             opt.start { response in
-                let jsonString = String(data: response.data, encoding: NSUTF8StringEncoding)
-                let data: NSData = (jsonString!.dataUsingEncoding(NSUTF8StringEncoding))!
+                let jsonString = String(data: response.data, encoding: String.Encoding.utf8)
+                let data: Data = (jsonString!.data(using: String.Encoding.utf8))!
                 do{
-                    let anyObj: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0))
-                    self.parseJson(anyObj!)
+                    let anyObj: Any? = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0))
+                    self.parseJson(anyObj! as AnyObject)
                 } catch {
                     self.uploaded = 3
                     print("Error: \(error)")
@@ -337,18 +337,18 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
     func handleResp(){
         if uploaded == 1{
             reset()
-            let alert = UIAlertController(title: "Upload Success", message: "Successfuly Uploaded To Your Account", preferredStyle: UIAlertControllerStyle.Alert)
-            let action = UIAlertAction(title: "Great", style: .Default, handler: nil)
+            let alert = UIAlertController(title: "Upload Success", message: "Successfuly Uploaded To Your Account", preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "Great", style: .default, handler: nil)
             alert.addAction(action)
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
         else{
             let tempmsg = errmsg
             reset()
-            let alert = UIAlertController(title: "Upload Failed", message: tempmsg, preferredStyle: UIAlertControllerStyle.Alert)
-            let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            let alert = UIAlertController(title: "Upload Failed", message: tempmsg, preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(action)
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -366,14 +366,14 @@ class UploadReceiptView: UIViewController, UINavigationControllerDelegate, UIIma
         img = UIImage()
         imageView.image = img
         uploaded = 2
-        purposeButton.setTitle(purpose, forState: .Normal)
-        typeButton.setTitle(type, forState: .Normal)
+        purposeButton.setTitle(purpose, for: UIControlState())
+        typeButton.setTitle(type, for: UIControlState())
         notesTF.text = notesText
         attendeesTF.text = attendeesText
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(imgPath) {
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: imgPath) {
             do {
-                try fileManager.removeItemAtPath(imgPath)
+                try fileManager.removeItem(atPath: imgPath)
             }
             catch let error as NSError {
                 print("Error: "+"\(error)")

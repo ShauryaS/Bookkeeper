@@ -40,13 +40,13 @@ class SettingsView: UIViewController{
     //sets the tint of the notification bar to white (light content)
     //sets the color of the notification bar to black
     //Return: none
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden =  false
-        UIApplication.sharedApplication().statusBarHidden = false
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-        let statusBar: UIView = UIApplication.sharedApplication().valueForKey("statusBar") as! UIView
-        if statusBar.respondsToSelector(Selector("setBackgroundColor:")) {
-            statusBar.backgroundColor = UIColor.blackColor()
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden =  false
+        UIApplication.shared.isStatusBarHidden = false
+        UIApplication.shared.statusBarStyle = .lightContent
+        let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+        if statusBar.responds(to: #selector(setter: UIView.backgroundColor)) {
+            statusBar.backgroundColor = UIColor.black
         }
     }
     
@@ -64,7 +64,7 @@ class SettingsView: UIViewController{
     //resets all the data arrays
     //deletes savedData file
     //switches view back to login view
-    @IBAction func logout(sender: AnyObject) {
+    @IBAction func logout(_ sender: AnyObject) {
         auth = 3
         acctNum = ""
         username = ""
@@ -73,17 +73,17 @@ class SettingsView: UIViewController{
         dataAll = [String: AnyObject]()
         dataTypes = [String]()
         dataPurposes = [String]()
-        let filePath = getDocumentsDirectory().stringByAppendingString("/savedData.txt")
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(filePath) {
+        let filePath = getDocumentsDirectory().appending("/savedData.txt")
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: filePath) {
             do {
-                try fileManager.removeItemAtPath(filePath)
+                try fileManager.removeItem(atPath: filePath)
             }
             catch let error as NSError {
                 print("Error: "+"\(error)")
             }
         }
-        self.performSegueWithIdentifier("backToLogInSegue", sender: sender)
+        self.performSegue(withIdentifier: "backToLogInSegue", sender: sender)
     }
     
 }

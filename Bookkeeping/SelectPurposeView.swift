@@ -15,7 +15,7 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     @IBOutlet var pickerView: UIPickerView!
     
     //variable to store the string text of the option selected
-    private var valSelected = ""
+    fileprivate var valSelected = ""
     
     //variable for the type label text
     var typeLabel = ""
@@ -50,13 +50,13 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     //sets the tint of the notification bar to white (light content)
     //sets the color of the notification bar to black
     //Return: none
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden =  false
-        UIApplication.sharedApplication().statusBarHidden = false
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-        let statusBar: UIView = UIApplication.sharedApplication().valueForKey("statusBar") as! UIView
-        if statusBar.respondsToSelector(Selector("setBackgroundColor:")) {
-            statusBar.backgroundColor = UIColor.blackColor()
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden =  false
+        UIApplication.shared.isStatusBarHidden = false
+        UIApplication.shared.statusBarStyle = .lightContent
+        let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+        if statusBar.responds(to: #selector(setter: UIView.backgroundColor)) {
+            statusBar.backgroundColor = UIColor.black
         }
     }
     
@@ -69,14 +69,14 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     //params: UIPickerView - used to override inherited method
     //func returns number of columns
     //Return: int
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     //params: UIPickerView, Int
     //func returns the number of rows
     //Return: Int
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerDataSource.count;
     }
     
@@ -84,22 +84,22 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     //func returns the text of the option selected
     //uses row (Int) to determine the variable selected
     //Return: String
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerDataSource[row]
     }
     
     //param: AnyObject that is recieved by button
     //param not used but necessary as button always sends an AnyObject
     //switches view to upload receipt view
-    @IBAction func choose(sender: AnyObject) {
-        self.performSegueWithIdentifier("SelectToMainSegue", sender: sender)
+    @IBAction func choose(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "SelectToMainSegue", sender: sender)
     }
     
     //params: UIPickerView, Int
     //saves the text of the option selected to a new constant variable
     //text also saved in valSelected var
     //Return: none
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         // selected value in Uipickerview in Swift
         let value=pickerDataSource[row]
@@ -111,9 +111,9 @@ class SelectPurposeView: UIViewController, UIPickerViewDataSource, UIPickerViewD
     //sends attendees text, notes text, and img path if going to select type view
     //takes the valSelected variable and sets it as the type label text
     //Return: none
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if "SelectToMainSegue"==segue.identifier{
-            let yourNextViewController = (segue.destinationViewController as! UploadReceiptView)
+            let yourNextViewController = (segue.destination as! UploadReceiptView)
             yourNextViewController.purpose = valSelected
             yourNextViewController.type = typeLabel
             if notes != ""{

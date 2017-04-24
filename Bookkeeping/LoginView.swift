@@ -46,15 +46,15 @@ class LogInView: UIViewController{
     //breaks up data read into separate variables (rememberMe, username, password, acctNum)
     //depending on rememberMe boolean val, switches to the upload receipt view
     //Return: none
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let filePath = getDocumentsDirectory().stringByAppendingString("/savedData.txt")
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(filePath) {
+        let filePath = getDocumentsDirectory().appending("/savedData.txt")
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: filePath) {
             var savedContents = ""
             do {
-                savedContents = try NSString(contentsOfURL: NSURL(fileURLWithPath: filePath), encoding: NSUTF8StringEncoding) as String
-                let contents = savedContents.characters.split(" ").map(String.init)
+                savedContents = try NSString(contentsOf: URL(fileURLWithPath: filePath), encoding: String.Encoding.utf8.rawValue) as String
+                let contents = savedContents.characters.split(separator: " ").map(String.init)
                 username = contents[0]
                 password = contents[1]
             }
@@ -72,13 +72,13 @@ class LogInView: UIViewController{
     //sets the tint of the notification bar to white (light content)
     //sets the color of the notification bar to black
     //Return: none
-    override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden =  true
-        UIApplication.sharedApplication().statusBarHidden = false
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-        let statusBar: UIView = UIApplication.sharedApplication().valueForKey("statusBar") as! UIView
-        if statusBar.respondsToSelector(Selector("setBackgroundColor:")) {
-            statusBar.backgroundColor = UIColor.blackColor()
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden =  true
+        UIApplication.shared.isStatusBarHidden = false
+        UIApplication.shared.statusBarStyle = .lightContent
+        let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+        if statusBar.responds(to: #selector(setter: UIView.backgroundColor)) {
+            statusBar.backgroundColor = UIColor.black
         }
     }
     
@@ -95,7 +95,7 @@ class LogInView: UIViewController{
     //if nil, alert box tells the user to enter credentials
     //else, attempts to connect to backend and get json data and permits auth accordingly
     //Return: none
-    @IBAction func signIn(sender: AnyObject) {
+    @IBAction func signIn(_ sender: AnyObject) {
         username = emailUserTF.text!
         password = passwordTF.text!
         if username != "" && password != ""{
@@ -103,10 +103,10 @@ class LogInView: UIViewController{
             permitAuth()
         }
         else{
-            let alert = UIAlertController(title: "Login Failed", message: "Enter Credentials.", preferredStyle: UIAlertControllerStyle.Alert)
-            let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            let alert = UIAlertController(title: "Login Failed", message: "Enter Credentials.", preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(action)
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -117,16 +117,16 @@ class LogInView: UIViewController{
     func permitAuth(){
         if auth == 1{
             saveAuth(username, password: password)
-            self.performSegueWithIdentifier("LogToMainSegue", sender: nil)
+            self.performSegue(withIdentifier: "LogToMainSegue", sender: nil)
         }
         else{
             auth = 3
             let tempmsg = emsg
             emsg = ""
-            let alert = UIAlertController(title: "Login Failed", message: tempmsg, preferredStyle: UIAlertControllerStyle.Alert)
-            let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            let alert = UIAlertController(title: "Login Failed", message: tempmsg, preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(action)
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -136,7 +136,7 @@ class LogInView: UIViewController{
     //json gets parsed
     //all errors caught
     //Return: none
-    func connectToBackEnd(username:String, password:String){
+    func connectToBackEnd(_ username:String, password:String){
         do {
             let opt = try HTTP.POST(url+"/upload?v=2&u="+username+"&p="+password)
             opt.start { response in
@@ -144,12 +144,12 @@ class LogInView: UIViewController{
                     print("error: \(err.localizedDescription)")
                     return //also notify app of failure as needed
                 }
-                let jsonString = String(data: response.data, encoding: NSUTF8StringEncoding)
-                let data: NSData = (jsonString!.dataUsingEncoding(NSUTF8StringEncoding))!
+                let jsonString = String(data: response.data, encoding: String.Encoding.utf8)
+                let data: Data = (jsonString!.data(using: String.Encoding.utf8))!
                 do{
-                    let anyObj: AnyObject? = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0))
+                    let anyObj: Any? = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0))
                     print(anyObj!)
-                    self.parseJson(anyObj!)
+                    self.parseJson(anyObj! as AnyObject)
                 } catch {
                     print("Error: \(error)")
                 }
@@ -165,14 +165,15 @@ class LogInView: UIViewController{
     //gets auth status and acct number and all the types and purposes options
     //sets the data array for types and sorts it lexographically
     //Return: none
-    func parseJson(anyObj:AnyObject){
+    func parseJson(_ anyObj:AnyObject){
         var user = User()
         if anyObj is NSDictionary {
             user.accts = anyObj["accts"] as? String
             user.types = anyObj["types"] as? [String: AnyObject]
             user.emsg = anyObj["errmsg"] as? String
-            user.ok = anyObj["OK"] as? Int
-            auth = user.ok!
+            user.ok = anyObj["OK"] as? AnyObject
+            print(user.ok?.description)
+            auth = Int((user.ok?.description)!)!
             if user.accts != nil{
                 acctNum = user.accts!
             }
@@ -181,7 +182,7 @@ class LogInView: UIViewController{
                 for key in (user.types?.keys)!{
                     dataTypes.append(key)
                 }
-                dataTypes = dataTypes.sort{
+                dataTypes = dataTypes.sorted{
                     return $0 < $1
                 }
             }
@@ -197,13 +198,13 @@ class LogInView: UIViewController{
     //changes val of rememberMe accordingly
     //used to determine whether credentials should be saved
     //Return: none
-    @IBAction func remember(sender: AnyObject) {
+    @IBAction func remember(_ sender: AnyObject) {
         if rememberMe == false{
-            rememberMeButton.selected = true
+            rememberMeButton.isSelected = true
             rememberMe = true
         }
         else{
-            rememberMeButton.selected = false
+            rememberMeButton.isSelected = false
             rememberMe = false
         }
     }
@@ -211,13 +212,13 @@ class LogInView: UIViewController{
     //params: username and password - to be saved in file
     //credential data is saved as string in a file
     //Return: none
-    func saveAuth(username: String, password: String){
+    func saveAuth(_ username: String, password: String){
         if rememberMe {
-            let filePath = getDocumentsDirectory().stringByAppendingString("/savedData.txt")
-            let fileurl = NSURL(fileURLWithPath: filePath)
+            let filePath = getDocumentsDirectory().appending("/savedData.txt")
+            let fileurl = URL(fileURLWithPath: filePath)
             let savedString = username+" "+password
             do{
-                try savedString.writeToURL(fileurl, atomically: false, encoding: NSUTF8StringEncoding)
+                try savedString.write(to: fileurl, atomically: false, encoding: String.Encoding.utf8)
             }
             catch{
                 print("Error: "+"\(error)")
@@ -228,7 +229,7 @@ class LogInView: UIViewController{
     //params: str - boolean in string format
     //func returns bool val depending on whether string val is "true" or "false"
     //Return: Boolean value
-    func stringBool(str: String) -> Bool{
+    func stringBool(_ str: String) -> Bool{
         switch(str){
             case "true":
                 return true

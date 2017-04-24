@@ -39,7 +39,7 @@ var rememberMe = false
 
 //Struct of the user object; used when json data of login post is being parsed
 struct User{
-    var ok:Int?
+    var ok:AnyObject?
     var accts:String?
     var types: [String: AnyObject]?
     var emsg:String?
@@ -52,7 +52,7 @@ struct User{
 //func used to get path to the apps document directory
 //Return: path as a string
 func getDocumentsDirectory() -> NSString {
-    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+    let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
     let documentsDirectory = paths[0]
-    return documentsDirectory
+    return documentsDirectory as NSString
 }

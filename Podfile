@@ -7,7 +7,7 @@ target 'Bookkeeping' do
   platform :ios, '8.0'
   use_frameworks!
 
-  pod 'SwiftHTTP', '~> 1.0.4'
+  pod 'SwiftHTTP', '~>2.0.0'
 
   target 'BookkeepingTests' do
     inherit! :search_paths
